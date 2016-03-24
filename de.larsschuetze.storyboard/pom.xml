@@ -44,14 +44,10 @@
 			<version>2.5</version>
 		</dependency>
 	</dependencies>
-	
+
 	<modules>
-		<module>
-			../../../Documents/GitHub/context-storyboard/de.larsschuetze.storyboard.library
-		</module>
-		<module>
-			../../../Documents/GitHub/context-storyboard/de.larsschuetze.storyboard.metamodel
-		</module>
+		<module>../de.larsschuetze.storyboard.library</module>
+		<module>../de.larsschuetze.storyboard.metamodel</module>
 		<module>../de.larsschuetze.storyboard.transformer</module>
 	</modules>
 </project>
