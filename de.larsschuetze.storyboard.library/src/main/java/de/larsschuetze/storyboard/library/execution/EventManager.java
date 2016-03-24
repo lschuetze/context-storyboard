@@ -1,0 +1,59 @@
+package de.larsschuetze.storyboard.library.execution;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import de.larsschuetze.storyboard.library.Event;
+import de.larsschuetze.storyboard.library.Token;
+
+public class EventManager {
+
+	// private Map<String, List<Event>> registeredEvents;
+	/**
+	 * Tokens that are awaiting a special event in order to progress further.
+	 * Those tokens are waiting at transitions that require a special event to
+	 * be fired.
+	 */
+	private Map<String, List<Token>> waitingTokens;
+
+	public EventManager() {
+		// registeredEvents = new HashMap<>();
+		waitingTokens = new HashMap<>();
+	}
+
+	// public void register(Event event, String eventType) {
+	// List<Event> events = new ArrayList<>();
+	// if (registeredEvents.containsKey(eventType)) {
+	// events = registeredEvents.get(eventType);
+	// }
+	// events.add(event);
+	// registeredEvents.put(eventType, events);
+	// }
+
+	public void eventOccurance(Event event) {
+		final List<Token> tokens = waitingTokens.get(event.getEventType());
+		if (tokens != null) {
+			for (Token token : tokens) {
+				token.setStalled(false);
+				token.carryEvent(event);
+			}
+		}
+		// remove all tokens that have been waiting
+		waitingTokens.put(event.getEventType(), null);
+	}
+
+	public void addWaitingToken(String eventType, Token token) {
+		List<Token> tokens = waitingTokens.get(eventType);
+		if (tokens == null) {
+			tokens = new ArrayList<>();
+		}
+		tokens.add(token);
+		waitingTokens.put(eventType, tokens);
+	}
+
+	public void shutdown() {
+		waitingTokens.clear();
+	}
+}
