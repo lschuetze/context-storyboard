@@ -32,7 +32,7 @@ public class EventManager {
 	// registeredEvents.put(eventType, events);
 	// }
 
-	public void eventOccurance(Event event) {
+	public void eventOccurance(Event<?> event) {
 		final List<Token> tokens = waitingTokens.get(event.getEventType());
 		if (tokens != null) {
 			for (Token token : tokens) {
@@ -40,8 +40,7 @@ public class EventManager {
 				token.carryEvent(event);
 			}
 		}
-		// remove all tokens that have been waiting
-		waitingTokens.put(event.getEventType(), null);
+		waitingTokens.remove(event.getEventType());
 	}
 
 	public void addWaitingToken(String eventType, Token token) {

@@ -9,7 +9,7 @@ public class Transition extends StoryboardElement {
 
 	private Node source;
 	private Node target;
-	private Guard guard;
+	private Guard<?, ?> guard;
 	private String triggerEventType;
 
 	public Transition(Node source, Node target) {
@@ -25,14 +25,16 @@ public class Transition extends StoryboardElement {
 		this.setName(name);
 	}
 
-	public void setGuard(Guard guard) {
+	public void setGuard(Guard<?, ?> guard) {
 		this.guard = guard;
 	}
 
 	@Override
 	public void consume(Token token) {
 		if (triggerEventType == null || token.carriesEvent()) {
-			if (guard == null || guard.accept(token.getEvent())) {
+			if (guard == null
+					|| guard.genericAccept(token.getEvent(), token.getEvent()
+							.getEventClazz())) {
 				token.carryEvent(null);
 				runtime.yield(token, target);
 			} else {

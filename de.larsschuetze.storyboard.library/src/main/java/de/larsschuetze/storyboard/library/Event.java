@@ -1,18 +1,23 @@
 package de.larsschuetze.storyboard.library;
 
-import de.larsschuetze.storyboard.library.execution.EventManager;
 
-public abstract class Event {
+public abstract class Event<T> {
 
-	private String eventType;
+	protected String eventType;
+	protected Class<T> eventClazz;
 
-	public Event(String eventType) {
+	public Event(String eventType, Class<T> eventClazz) {
 		this.eventType = eventType;
+		this.eventClazz = eventClazz;
 	}
 
-	public abstract Object callMethod(String methodName);
+	public abstract <R> R callMethod(String methodName);
 
 	public String getEventType() {
 		return eventType;
+	}
+	
+	public Class<T> getEventClazz() {
+		return eventClazz;
 	}
 }

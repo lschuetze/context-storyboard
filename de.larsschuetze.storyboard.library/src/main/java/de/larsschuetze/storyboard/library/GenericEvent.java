@@ -5,37 +5,30 @@ import java.lang.reflect.Method;
 
 import de.larsschuetze.storyboard.library.execution.EventManager;
 
-public class GenericEvent extends Event {
+public class GenericEvent<T> extends Event<T> {
 
-	protected Object eventObject;
-	protected Class<?> eventObjectClass;
+	protected T eventObject;
 
-	public GenericEvent(String eventType, Object eventObject,
-			Class<?> eventObjectClass) {
-		super(eventType);
+	public GenericEvent(String eventType, T eventObject, Class<T> eventClazz) {
+		super(eventType, eventClazz);
 		this.eventObject = eventObject;
-		this.eventObjectClass = eventObjectClass;
 	}
 
 	public Object getEventObject() {
 		return eventObject;
 	}
 
-	public Class<?> getEventObjectClass() {
-		return eventObjectClass;
-	}
-
 	@Override
-	public Object callMethod(String methodName) {
-		Object result = null;
+	@SuppressWarnings("unchecked")
+	public <R> R callMethod(String methodName) {
 		try {
-			Method method = eventObjectClass.getMethod(methodName);
-			result = method.invoke(eventObject);
+			Method method = eventClazz.getMethod(methodName);
+			return (R) method.invoke(eventObject);
 		} catch (NoSuchMethodException | SecurityException
 				| IllegalAccessException | IllegalArgumentException
 				| InvocationTargetException e) {
 			e.printStackTrace();
 		}
-		return result;
+		return null;
 	}
 }

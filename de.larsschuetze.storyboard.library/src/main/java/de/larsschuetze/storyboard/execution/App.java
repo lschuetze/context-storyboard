@@ -58,7 +58,7 @@ public class App {
 
 		EndNode end = new EndNode();
 
-		Guard guard = new TestGuard();
+		Guard<TestClass, Integer> guard = new TestGuard();
 		guard.setMethod("test");
 
 		Thread t = new Thread(new Runnable() {
@@ -66,10 +66,10 @@ public class App {
 			@Override
 			public void run() {
 				TestClass testObject = new TestClass();
-				Event event = new GenericEvent("TestEvent", testObject,
-						testObject.getClass());
+				Event<TestClass> event = new GenericEvent<TestClass>(
+						"TestEvent", testObject, TestClass.class);
 				int i = 1;
-				while (i < 9) {
+				while (i < 3) {
 					try {
 						Thread.sleep(2000 * i);
 						i++;
