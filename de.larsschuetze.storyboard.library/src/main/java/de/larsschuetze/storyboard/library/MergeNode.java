@@ -8,4 +8,11 @@ public class MergeNode extends ControlNode {
 		runtime.yield(token, target);
 	}
 
+	@Override
+	public boolean addOutgoingTransition(Transition transition) {
+		if (outgoingTransitions.size() == 0) {
+			return super.addOutgoingTransition(transition);
+		}
+		return false;
+	}
 }
