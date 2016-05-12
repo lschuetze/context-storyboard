@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/de.larsschuetze.storyboard.metamodel/src" editDirectory="/de.larsschuetze.storyboard.metamodel.edit/src"
+    editorDirectory="/de.larsschuetze.storyboard.metamodel.editor/src" modelPluginID="de.larsschuetze.storyboard.metamodel"
+    modelName="Metamodel" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="7.0" copyrightFields="false"
+    editPluginID="de.larsschuetze.storyboard.metamodel.edit" editorPluginID="de.larsschuetze.storyboard.metamodel.editor"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>metamodel.ecore</foreignModel>
+  <genPackages prefix="Metamodel" disposableProviderFactory="true" ecorePackage="metamodel.ecore#/">
+    <genClasses ecoreClass="metamodel.ecore#//Edge">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference metamodel.ecore#//Edge/target"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference metamodel.ecore#//Edge/source"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel.ecore#//Transition/constraint"/>
+    </genClasses>
+    <genClasses ecoreClass="metamodel.ecore#//Node">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference metamodel.ecore#//Node/in"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference metamodel.ecore#//Node/out"/>
+    </genClasses>
+    <genClasses ecoreClass="metamodel.ecore#//RoleStoryBoard">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel.ecore#//RoleStoryBoard/nodes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel.ecore#//RoleStoryBoard/edges"/>
+    </genClasses>
+    <genClasses ecoreClass="metamodel.ecore#//TransitionConstraint">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel.ecore#//TransitionConstraint/event"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel.ecore#//TransitionConstraint/guard"/>
+    </genClasses>
+    <genClasses ecoreClass="metamodel.ecore#//Event">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel.ecore#//Event/name"/>
+    </genClasses>
+    <genClasses ecoreClass="metamodel.ecore#//Guard">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference metamodel.ecore#//Guard/context"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference metamodel.ecore#//Guard/event"/>
+    </genClasses>
+    <genClasses ecoreClass="metamodel.ecore#//Relation">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference metamodel.ecore#//Relation/first"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference metamodel.ecore#//Relation/second"/>
+    </genClasses>
+    <genClasses ecoreClass="metamodel.ecore#//StoryPatternNode">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference metamodel.ecore#//StoryPatternNode/roleModelNodes"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="metamodel.ecore#//ControlNode"/>
+    <genClasses ecoreClass="metamodel.ecore#//RoleModelNode">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel.ecore#//RoleModelNode/elements"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel.ecore#//RoleModelNode/name"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="metamodel.ecore#//RoleModelElement"/>
+    <genClasses image="false" ecoreClass="metamodel.ecore#//RoleNode">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference metamodel.ecore#//RoleNode/relations"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel.ecore#//RoleNode/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference metamodel.ecore#//RoleNode/compartment"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference metamodel.ecore#//RoleNode/player"/>
+    </genClasses>
+    <genClasses ecoreClass="metamodel.ecore#//NaturalNode">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel.ecore#//NaturalNode/playingObject"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference metamodel.ecore#//NaturalNode/roles"/>
+    </genClasses>
+    <genClasses ecoreClass="metamodel.ecore#//SuccessNode"/>
+    <genClasses ecoreClass="metamodel.ecore#//FailNode"/>
+    <genClasses ecoreClass="metamodel.ecore#//ForkNode"/>
+    <genClasses ecoreClass="metamodel.ecore#//JoinNode">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel.ecore#//JoinNode/joinSpec"/>
+    </genClasses>
+    <genClasses ecoreClass="metamodel.ecore#//StartNode"/>
+    <genClasses ecoreClass="metamodel.ecore#//EndNote"/>
+    <genClasses ecoreClass="metamodel.ecore#//SinkNode"/>
+    <genClasses ecoreClass="metamodel.ecore#//PlayRoleNode"/>
+    <genClasses ecoreClass="metamodel.ecore#//AddRoleNode"/>
+    <genClasses image="false" ecoreClass="metamodel.ecore#//ConditionRoleNode"/>
+    <genClasses image="false" ecoreClass="metamodel.ecore#//RewriteRoleNode"/>
+    <genClasses ecoreClass="metamodel.ecore#//RemoveRoleNode"/>
+    <genClasses ecoreClass="metamodel.ecore#//RenewRoleNode"/>
+    <genClasses ecoreClass="metamodel.ecore#//ProhibitedRoleNode"/>
+    <genClasses ecoreClass="metamodel.ecore#//GenericEvent"/>
+    <genClasses ecoreClass="metamodel.ecore#//Context"/>
+    <genClasses ecoreClass="metamodel.ecore#//Compartment"/>
+    <genClasses ecoreClass="metamodel.ecore#//JoinSpec"/>
+    <genClasses ecoreClass="metamodel.ecore#//Transition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel.ecore#//Transition/constraint"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

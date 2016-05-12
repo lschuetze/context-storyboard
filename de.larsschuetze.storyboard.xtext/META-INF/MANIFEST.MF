@@ -1,0 +1,32 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: de.larsschuetze.storyboard.xtext
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: de.larsschuetze.storyboard.xtext; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext,
+ org.eclipse.xtext.xbase,
+ org.eclipse.equinox.common;bundle-version="3.5.0",
+ org.eclipse.emf.ecore,
+ org.objectweb.asm;bundle-version="[5.0.1,6.0.0)";resolution:=optional,
+ org.eclipse.xtext.util,
+ org.antlr.runtime,
+ org.eclipse.xtend.lib,
+ org.eclipse.emf.common,
+ org.eclipse.xtext.common.types,
+ org.eclipse.xtext.xbase.lib,
+ de.larsschuetze.storyboard.runtime;bundle-version="1.0.0";visibility:=reexport
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Export-Package: de.larsschuetze.storyboard.parser.antlr,
+ de.larsschuetze.storyboard.serializer,
+ de.larsschuetze.storyboard.scoping,
+ de.larsschuetze.storyboard.validation,
+ de.larsschuetze.storyboard.dsl,
+ de.larsschuetze.storyboard,
+ de.larsschuetze.storyboard.services,
+ de.larsschuetze.storyboard.dsl.impl,
+ de.larsschuetze.storyboard.dsl.util,
+ de.larsschuetze.storyboard.jvmmodel,
+ de.larsschuetze.storyboard.parser.antlr.internal
+Import-Package: org.apache.log4j

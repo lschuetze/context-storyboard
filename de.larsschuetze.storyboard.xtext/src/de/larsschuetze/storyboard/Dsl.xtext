@@ -1,0 +1,96 @@
+grammar de.larsschuetze.storyboard.Dsl
+with org.eclipse.xtext.xbase.Xbase
+
+generate dsl "http://www.larsschuetze.de/storyboard/Dsl"
+
+Storyboard:
+	'events' '{'
+		importedEvents += Event+
+	'}'
+	'storyboard' name = ValidID
+	elements += AbstractElement*
+;
+
+AbstractElement:
+	Node | Transition
+;
+
+Node:
+	ControlNode | StoryPatternNode
+;
+
+ControlNode:
+	StartNode
+;
+
+StartNode:
+	'start' name = ValidID
+;
+
+Event:
+	'import' eventType = JvmTypeReference 'as' name = ValidID
+;
+
+Transition:
+	'transition' name = ValidID '{'
+		//check if source & target are storypatterns later
+		'source' source = [Node]('.'sourcePort = StoryPatternPort)?
+		'target' target = [Node]
+		'on' event = [Event]
+		('when' guard = XClosure)?
+	'}'
+;
+
+StoryPatternPort:
+	SuccessPort | FailurePort
+;
+
+FailurePort:
+	'failure'
+;
+
+SuccessPort:
+	'success'	
+;
+
+StoryPatternNode:
+	'storypattern' name = ValidID
+	'{'
+		'class' className = QualifiedName '{'
+			(roleReconfigurations += RoleNode)+
+		'}'
+	'}'
+;
+
+RoleNode:
+	ConditionRoleNode | RewriteRoleNode
+;
+
+RewriteRoleNode:
+	AddRoleNode | RenewRoleNode | RemoveRoleNode
+;
+
+RemoveRoleNode:
+	'remove' name = QualifiedName
+;
+
+RenewRoleNode:
+	'renew' name = QualifiedName
+;
+
+AddRoleNode:
+	'add' name = QualifiedName
+;
+
+ConditionRoleNode:
+	PlayRoleNode | ProhibitedRoleNode
+;
+
+ProhibitedRoleNode:
+	'prohibits' name = QualifiedName
+;
+
+PlayRoleNode:
+	'plays' name = QualifiedName
+;
+
