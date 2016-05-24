@@ -1,16 +1,14 @@
 package de.larsschuetze.storyboard.model.crom.crom_l0;
 
-
 public class Player {
 
-	private String className;
+	private String typeName;
 
-	public void setClassName(String className) {
-		this.className = className;
+	public Player(String typeName) {
+		this.typeName = typeName;
 	}
-	
-	public String getClassName() {
-		return className;
+
+	public String getTypeName() {
+		return typeName;
 	}
-	
 }
