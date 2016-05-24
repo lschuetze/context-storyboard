@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated crom_l1 -->
+      <package
+            uri="platform:/resource/org.rosi.crom.familymetamodel/"
+            class="de.larsschuetze.storyboard.model.crom.crom_l1.Crom_l1Package"
+            genModel="model/crom_l1.genmodel"/>
+   </extension>
+
+</plugin>
