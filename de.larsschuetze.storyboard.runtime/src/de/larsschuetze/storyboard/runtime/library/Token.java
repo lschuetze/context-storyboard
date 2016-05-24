@@ -2,6 +2,7 @@ package de.larsschuetze.storyboard.runtime.library;
 
 import java.math.BigInteger;
 
+import de.larsschuetze.storyboard.model.crom.crom_l0.Player;
 import de.larsschuetze.storyboard.runtime.execution.execution.TokenManager;
 
 public class Token implements NamedElement {
@@ -11,7 +12,7 @@ public class Token implements NamedElement {
 	private String name;
 	private boolean isStalled; // TODO
 
-	private Event<?> carriedEvent;
+	private Event carriedEvent;
 
 	public Token(TokenManager manager, BigInteger id) {
 		this.manager = manager;
@@ -60,7 +61,7 @@ public class Token implements NamedElement {
 		this.isStalled = isStalled;
 	}
 
-	public void carryEvent(Event<?> event) {
+	public void carryEvent(Event event) {
 		carriedEvent = event;
 	}
 
@@ -68,7 +69,7 @@ public class Token implements NamedElement {
 		return carriedEvent != null;
 	}
 
-	public Event<?> getEvent() {
+	public Event getEvent() {
 		return carriedEvent;
 	}
 }

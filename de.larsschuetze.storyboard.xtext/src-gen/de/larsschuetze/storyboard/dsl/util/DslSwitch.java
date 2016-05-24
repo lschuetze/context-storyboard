@@ -114,6 +114,16 @@ public class DslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case DslPackage.END_NODE:
+      {
+        EndNode endNode = (EndNode)theEObject;
+        T result = caseEndNode(endNode);
+        if (result == null) result = caseControlNode(endNode);
+        if (result == null) result = caseNode(endNode);
+        if (result == null) result = caseAbstractElement(endNode);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case DslPackage.EVENT:
       {
         Event event = (Event)theEObject;
@@ -126,6 +136,13 @@ public class DslSwitch<T> extends Switch<T>
         Transition transition = (Transition)theEObject;
         T result = caseTransition(transition);
         if (result == null) result = caseAbstractElement(transition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case DslPackage.GUARD:
+      {
+        Guard guard = (Guard)theEObject;
+        T result = caseGuard(guard);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -291,6 +308,22 @@ public class DslSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>End Node</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>End Node</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEndNode(EndNode object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Event</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -318,6 +351,22 @@ public class DslSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseTransition(Transition object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Guard</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Guard</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseGuard(Guard object)
   {
     return null;
   }

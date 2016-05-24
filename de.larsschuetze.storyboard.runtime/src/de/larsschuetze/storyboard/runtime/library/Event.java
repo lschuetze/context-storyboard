@@ -1,23 +1,21 @@
 package de.larsschuetze.storyboard.runtime.library;
 
 
-public abstract class Event<T> {
+public class Event {
 
-	protected String eventType;
-	protected Class<T> eventClazz;
+	protected Object eventObject;
+	protected Class<?> eventClass;
 
-	public Event(String eventType, Class<T> eventClazz) {
-		this.eventType = eventType;
-		this.eventClazz = eventClazz;
+	public Event(Class<?> eventClass, Object eventObject) {
+		this.eventObject = eventObject;
+		this.eventClass = eventClass;
 	}
 
-	public abstract <R> R callMethod(String methodName);
-
-	public String getEventType() {
-		return eventType;
+	public Object getEventObject() {
+		return eventObject;
 	}
 	
-	public Class<T> getEventClazz() {
-		return eventClazz;
+	public Class<?> getEventClass() {
+		return eventClass;
 	}
 }

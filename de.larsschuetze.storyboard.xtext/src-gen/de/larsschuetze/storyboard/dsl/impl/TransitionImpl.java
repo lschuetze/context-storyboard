@@ -5,6 +5,7 @@ package de.larsschuetze.storyboard.dsl.impl;
 
 import de.larsschuetze.storyboard.dsl.DslPackage;
 import de.larsschuetze.storyboard.dsl.Event;
+import de.larsschuetze.storyboard.dsl.Guard;
 import de.larsschuetze.storyboard.dsl.Node;
 import de.larsschuetze.storyboard.dsl.Transition;
 
@@ -16,8 +17,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.xtext.xbase.XExpression;
-
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Transition</b></em>'.
@@ -25,12 +24,11 @@ import org.eclipse.xtext.xbase.XExpression;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.larsschuetze.storyboard.dsl.impl.TransitionImpl#getName <em>Name</em>}</li>
+ *   <li>{@link de.larsschuetze.storyboard.dsl.impl.TransitionImpl#getEvent <em>Event</em>}</li>
+ *   <li>{@link de.larsschuetze.storyboard.dsl.impl.TransitionImpl#getGuard <em>Guard</em>}</li>
  *   <li>{@link de.larsschuetze.storyboard.dsl.impl.TransitionImpl#getSource <em>Source</em>}</li>
  *   <li>{@link de.larsschuetze.storyboard.dsl.impl.TransitionImpl#getSourcePort <em>Source Port</em>}</li>
  *   <li>{@link de.larsschuetze.storyboard.dsl.impl.TransitionImpl#getTarget <em>Target</em>}</li>
- *   <li>{@link de.larsschuetze.storyboard.dsl.impl.TransitionImpl#getEvent <em>Event</em>}</li>
- *   <li>{@link de.larsschuetze.storyboard.dsl.impl.TransitionImpl#getGuard <em>Guard</em>}</li>
  * </ul>
  * </p>
  *
@@ -39,24 +37,24 @@ import org.eclipse.xtext.xbase.XExpression;
 public class TransitionImpl extends AbstractElementImpl implements Transition
 {
   /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * The cached value of the '{@link #getEvent() <em>Event</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
+   * @see #getEvent()
    * @generated
    * @ordered
    */
-  protected static final String NAME_EDEFAULT = null;
+  protected Event event;
 
   /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * The cached value of the '{@link #getGuard() <em>Guard</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
+   * @see #getGuard()
    * @generated
    * @ordered
    */
-  protected String name = NAME_EDEFAULT;
+  protected Guard guard;
 
   /**
    * The cached value of the '{@link #getSource() <em>Source</em>}' reference.
@@ -99,26 +97,6 @@ public class TransitionImpl extends AbstractElementImpl implements Transition
   protected Node target;
 
   /**
-   * The cached value of the '{@link #getEvent() <em>Event</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getEvent()
-   * @generated
-   * @ordered
-   */
-  protected Event event;
-
-  /**
-   * The cached value of the '{@link #getGuard() <em>Guard</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getGuard()
-   * @generated
-   * @ordered
-   */
-  protected XExpression guard;
-
-  /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -144,9 +122,19 @@ public class TransitionImpl extends AbstractElementImpl implements Transition
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  public Event getEvent()
   {
-    return name;
+    if (event != null && event.eIsProxy())
+    {
+      InternalEObject oldEvent = (InternalEObject)event;
+      event = (Event)eResolveProxy(oldEvent);
+      if (event != oldEvent)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, DslPackage.TRANSITION__EVENT, oldEvent, event));
+      }
+    }
+    return event;
   }
 
   /**
@@ -154,12 +142,70 @@ public class TransitionImpl extends AbstractElementImpl implements Transition
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  public Event basicGetEvent()
   {
-    String oldName = name;
-    name = newName;
+    return event;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setEvent(Event newEvent)
+  {
+    Event oldEvent = event;
+    event = newEvent;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, DslPackage.TRANSITION__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, DslPackage.TRANSITION__EVENT, oldEvent, event));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Guard getGuard()
+  {
+    return guard;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetGuard(Guard newGuard, NotificationChain msgs)
+  {
+    Guard oldGuard = guard;
+    guard = newGuard;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DslPackage.TRANSITION__GUARD, oldGuard, newGuard);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setGuard(Guard newGuard)
+  {
+    if (newGuard != guard)
+    {
+      NotificationChain msgs = null;
+      if (guard != null)
+        msgs = ((InternalEObject)guard).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - DslPackage.TRANSITION__GUARD, null, msgs);
+      if (newGuard != null)
+        msgs = ((InternalEObject)newGuard).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - DslPackage.TRANSITION__GUARD, null, msgs);
+      msgs = basicSetGuard(newGuard, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, DslPackage.TRANSITION__GUARD, newGuard, newGuard));
   }
 
   /**
@@ -276,97 +322,6 @@ public class TransitionImpl extends AbstractElementImpl implements Transition
    * <!-- end-user-doc -->
    * @generated
    */
-  public Event getEvent()
-  {
-    if (event != null && event.eIsProxy())
-    {
-      InternalEObject oldEvent = (InternalEObject)event;
-      event = (Event)eResolveProxy(oldEvent);
-      if (event != oldEvent)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, DslPackage.TRANSITION__EVENT, oldEvent, event));
-      }
-    }
-    return event;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Event basicGetEvent()
-  {
-    return event;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setEvent(Event newEvent)
-  {
-    Event oldEvent = event;
-    event = newEvent;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, DslPackage.TRANSITION__EVENT, oldEvent, event));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public XExpression getGuard()
-  {
-    return guard;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetGuard(XExpression newGuard, NotificationChain msgs)
-  {
-    XExpression oldGuard = guard;
-    guard = newGuard;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DslPackage.TRANSITION__GUARD, oldGuard, newGuard);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setGuard(XExpression newGuard)
-  {
-    if (newGuard != guard)
-    {
-      NotificationChain msgs = null;
-      if (guard != null)
-        msgs = ((InternalEObject)guard).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - DslPackage.TRANSITION__GUARD, null, msgs);
-      if (newGuard != null)
-        msgs = ((InternalEObject)newGuard).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - DslPackage.TRANSITION__GUARD, null, msgs);
-      msgs = basicSetGuard(newGuard, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, DslPackage.TRANSITION__GUARD, newGuard, newGuard));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -388,8 +343,11 @@ public class TransitionImpl extends AbstractElementImpl implements Transition
   {
     switch (featureID)
     {
-      case DslPackage.TRANSITION__NAME:
-        return getName();
+      case DslPackage.TRANSITION__EVENT:
+        if (resolve) return getEvent();
+        return basicGetEvent();
+      case DslPackage.TRANSITION__GUARD:
+        return getGuard();
       case DslPackage.TRANSITION__SOURCE:
         if (resolve) return getSource();
         return basicGetSource();
@@ -398,11 +356,6 @@ public class TransitionImpl extends AbstractElementImpl implements Transition
       case DslPackage.TRANSITION__TARGET:
         if (resolve) return getTarget();
         return basicGetTarget();
-      case DslPackage.TRANSITION__EVENT:
-        if (resolve) return getEvent();
-        return basicGetEvent();
-      case DslPackage.TRANSITION__GUARD:
-        return getGuard();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -417,8 +370,11 @@ public class TransitionImpl extends AbstractElementImpl implements Transition
   {
     switch (featureID)
     {
-      case DslPackage.TRANSITION__NAME:
-        setName((String)newValue);
+      case DslPackage.TRANSITION__EVENT:
+        setEvent((Event)newValue);
+        return;
+      case DslPackage.TRANSITION__GUARD:
+        setGuard((Guard)newValue);
         return;
       case DslPackage.TRANSITION__SOURCE:
         setSource((Node)newValue);
@@ -428,12 +384,6 @@ public class TransitionImpl extends AbstractElementImpl implements Transition
         return;
       case DslPackage.TRANSITION__TARGET:
         setTarget((Node)newValue);
-        return;
-      case DslPackage.TRANSITION__EVENT:
-        setEvent((Event)newValue);
-        return;
-      case DslPackage.TRANSITION__GUARD:
-        setGuard((XExpression)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -449,8 +399,11 @@ public class TransitionImpl extends AbstractElementImpl implements Transition
   {
     switch (featureID)
     {
-      case DslPackage.TRANSITION__NAME:
-        setName(NAME_EDEFAULT);
+      case DslPackage.TRANSITION__EVENT:
+        setEvent((Event)null);
+        return;
+      case DslPackage.TRANSITION__GUARD:
+        setGuard((Guard)null);
         return;
       case DslPackage.TRANSITION__SOURCE:
         setSource((Node)null);
@@ -460,12 +413,6 @@ public class TransitionImpl extends AbstractElementImpl implements Transition
         return;
       case DslPackage.TRANSITION__TARGET:
         setTarget((Node)null);
-        return;
-      case DslPackage.TRANSITION__EVENT:
-        setEvent((Event)null);
-        return;
-      case DslPackage.TRANSITION__GUARD:
-        setGuard((XExpression)null);
         return;
     }
     super.eUnset(featureID);
@@ -481,18 +428,16 @@ public class TransitionImpl extends AbstractElementImpl implements Transition
   {
     switch (featureID)
     {
-      case DslPackage.TRANSITION__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case DslPackage.TRANSITION__EVENT:
+        return event != null;
+      case DslPackage.TRANSITION__GUARD:
+        return guard != null;
       case DslPackage.TRANSITION__SOURCE:
         return source != null;
       case DslPackage.TRANSITION__SOURCE_PORT:
         return SOURCE_PORT_EDEFAULT == null ? sourcePort != null : !SOURCE_PORT_EDEFAULT.equals(sourcePort);
       case DslPackage.TRANSITION__TARGET:
         return target != null;
-      case DslPackage.TRANSITION__EVENT:
-        return event != null;
-      case DslPackage.TRANSITION__GUARD:
-        return guard != null;
     }
     return super.eIsSet(featureID);
   }
@@ -508,9 +453,7 @@ public class TransitionImpl extends AbstractElementImpl implements Transition
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (name: ");
-    result.append(name);
-    result.append(", sourcePort: ");
+    result.append(" (sourcePort: ");
     result.append(sourcePort);
     result.append(')');
     return result.toString();

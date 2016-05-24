@@ -6,7 +6,9 @@ package de.larsschuetze.storyboard.serializer;
 import com.google.inject.Inject;
 import de.larsschuetze.storyboard.dsl.AddRoleNode;
 import de.larsschuetze.storyboard.dsl.DslPackage;
+import de.larsschuetze.storyboard.dsl.EndNode;
 import de.larsschuetze.storyboard.dsl.Event;
+import de.larsschuetze.storyboard.dsl.Guard;
 import de.larsschuetze.storyboard.dsl.PlayRoleNode;
 import de.larsschuetze.storyboard.dsl.ProhibitedRoleNode;
 import de.larsschuetze.storyboard.dsl.RemoveRoleNode;
@@ -87,23 +89,69 @@ public class DslSemanticSequencer extends XbaseSemanticSequencer {
 		if (epackage == DslPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
 			case DslPackage.ADD_ROLE_NODE:
-				sequence_AddRoleNode(context, (AddRoleNode) semanticObject); 
+				if (rule == grammarAccess.getRewriteRoleNodeRule()
+						|| rule == grammarAccess.getAddRoleNodeRule()) {
+					sequence_AddRoleNode(context, (AddRoleNode) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getRoleNodeRule()) {
+					sequence_AddRoleNode_RoleNode(context, (AddRoleNode) semanticObject); 
+					return; 
+				}
+				else break;
+			case DslPackage.END_NODE:
+				sequence_EndNode(context, (EndNode) semanticObject); 
 				return; 
 			case DslPackage.EVENT:
 				sequence_Event(context, (Event) semanticObject); 
 				return; 
+			case DslPackage.GUARD:
+				sequence_Guard(context, (Guard) semanticObject); 
+				return; 
 			case DslPackage.PLAY_ROLE_NODE:
-				sequence_PlayRoleNode(context, (PlayRoleNode) semanticObject); 
-				return; 
+				if (rule == grammarAccess.getConditionRoleNodeRule()
+						|| rule == grammarAccess.getPlayRoleNodeRule()) {
+					sequence_PlayRoleNode(context, (PlayRoleNode) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getRoleNodeRule()) {
+					sequence_PlayRoleNode_RoleNode(context, (PlayRoleNode) semanticObject); 
+					return; 
+				}
+				else break;
 			case DslPackage.PROHIBITED_ROLE_NODE:
-				sequence_ProhibitedRoleNode(context, (ProhibitedRoleNode) semanticObject); 
-				return; 
+				if (rule == grammarAccess.getConditionRoleNodeRule()
+						|| rule == grammarAccess.getProhibitedRoleNodeRule()) {
+					sequence_ProhibitedRoleNode(context, (ProhibitedRoleNode) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getRoleNodeRule()) {
+					sequence_ProhibitedRoleNode_RoleNode(context, (ProhibitedRoleNode) semanticObject); 
+					return; 
+				}
+				else break;
 			case DslPackage.REMOVE_ROLE_NODE:
-				sequence_RemoveRoleNode(context, (RemoveRoleNode) semanticObject); 
-				return; 
+				if (rule == grammarAccess.getRewriteRoleNodeRule()
+						|| rule == grammarAccess.getRemoveRoleNodeRule()) {
+					sequence_RemoveRoleNode(context, (RemoveRoleNode) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getRoleNodeRule()) {
+					sequence_RemoveRoleNode_RoleNode(context, (RemoveRoleNode) semanticObject); 
+					return; 
+				}
+				else break;
 			case DslPackage.RENEW_ROLE_NODE:
-				sequence_RenewRoleNode(context, (RenewRoleNode) semanticObject); 
-				return; 
+				if (rule == grammarAccess.getRewriteRoleNodeRule()
+						|| rule == grammarAccess.getRenewRoleNodeRule()) {
+					sequence_RenewRoleNode(context, (RenewRoleNode) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getRoleNodeRule()) {
+					sequence_RenewRoleNode_RoleNode(context, (RenewRoleNode) semanticObject); 
+					return; 
+				}
+				else break;
 			case DslPackage.START_NODE:
 				sequence_StartNode(context, (StartNode) semanticObject); 
 				return; 
@@ -362,7 +410,6 @@ public class DslSemanticSequencer extends XbaseSemanticSequencer {
 	
 	/**
 	 * Contexts:
-	 *     RoleNode returns AddRoleNode
 	 *     RewriteRoleNode returns AddRoleNode
 	 *     AddRoleNode returns AddRoleNode
 	 *
@@ -376,6 +423,48 @@ public class DslSemanticSequencer extends XbaseSemanticSequencer {
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getAddRoleNodeAccess().getNameQualifiedNameParserRuleCall_1_0(), semanticObject.getName());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     RoleNode returns AddRoleNode
+	 *
+	 * Constraint:
+	 *     (name=QualifiedName compartmentName=QualifiedName)
+	 */
+	protected void sequence_AddRoleNode_RoleNode(ISerializationContext context, AddRoleNode semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, DslPackage.Literals.ROLE_NODE__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DslPackage.Literals.ROLE_NODE__NAME));
+			if (transientValues.isValueTransient(semanticObject, DslPackage.Literals.ROLE_NODE__COMPARTMENT_NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DslPackage.Literals.ROLE_NODE__COMPARTMENT_NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getAddRoleNodeAccess().getNameQualifiedNameParserRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getRoleNodeAccess().getCompartmentNameQualifiedNameParserRuleCall_2_0(), semanticObject.getCompartmentName());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     AbstractElement returns EndNode
+	 *     Node returns EndNode
+	 *     ControlNode returns EndNode
+	 *     EndNode returns EndNode
+	 *
+	 * Constraint:
+	 *     name=ValidID
+	 */
+	protected void sequence_EndNode(ISerializationContext context, EndNode semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, DslPackage.Literals.ABSTRACT_ELEMENT__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DslPackage.Literals.ABSTRACT_ELEMENT__NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getEndNodeAccess().getNameValidIDParserRuleCall_1_0(), semanticObject.getName());
 		feeder.finish();
 	}
 	
@@ -403,7 +492,24 @@ public class DslSemanticSequencer extends XbaseSemanticSequencer {
 	
 	/**
 	 * Contexts:
-	 *     RoleNode returns PlayRoleNode
+	 *     Guard returns Guard
+	 *
+	 * Constraint:
+	 *     guard=GuardValue
+	 */
+	protected void sequence_Guard(ISerializationContext context, Guard semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, DslPackage.Literals.GUARD__GUARD) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DslPackage.Literals.GUARD__GUARD));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getGuardAccess().getGuardGuardValueParserRuleCall_1_0(), semanticObject.getGuard());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     ConditionRoleNode returns PlayRoleNode
 	 *     PlayRoleNode returns PlayRoleNode
 	 *
@@ -423,7 +529,27 @@ public class DslSemanticSequencer extends XbaseSemanticSequencer {
 	
 	/**
 	 * Contexts:
-	 *     RoleNode returns ProhibitedRoleNode
+	 *     RoleNode returns PlayRoleNode
+	 *
+	 * Constraint:
+	 *     (name=QualifiedName compartmentName=QualifiedName)
+	 */
+	protected void sequence_PlayRoleNode_RoleNode(ISerializationContext context, PlayRoleNode semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, DslPackage.Literals.ROLE_NODE__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DslPackage.Literals.ROLE_NODE__NAME));
+			if (transientValues.isValueTransient(semanticObject, DslPackage.Literals.ROLE_NODE__COMPARTMENT_NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DslPackage.Literals.ROLE_NODE__COMPARTMENT_NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getPlayRoleNodeAccess().getNameQualifiedNameParserRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getRoleNodeAccess().getCompartmentNameQualifiedNameParserRuleCall_2_0(), semanticObject.getCompartmentName());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     ConditionRoleNode returns ProhibitedRoleNode
 	 *     ProhibitedRoleNode returns ProhibitedRoleNode
 	 *
@@ -443,7 +569,27 @@ public class DslSemanticSequencer extends XbaseSemanticSequencer {
 	
 	/**
 	 * Contexts:
-	 *     RoleNode returns RemoveRoleNode
+	 *     RoleNode returns ProhibitedRoleNode
+	 *
+	 * Constraint:
+	 *     (name=QualifiedName compartmentName=QualifiedName)
+	 */
+	protected void sequence_ProhibitedRoleNode_RoleNode(ISerializationContext context, ProhibitedRoleNode semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, DslPackage.Literals.ROLE_NODE__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DslPackage.Literals.ROLE_NODE__NAME));
+			if (transientValues.isValueTransient(semanticObject, DslPackage.Literals.ROLE_NODE__COMPARTMENT_NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DslPackage.Literals.ROLE_NODE__COMPARTMENT_NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getProhibitedRoleNodeAccess().getNameQualifiedNameParserRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getRoleNodeAccess().getCompartmentNameQualifiedNameParserRuleCall_2_0(), semanticObject.getCompartmentName());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     RewriteRoleNode returns RemoveRoleNode
 	 *     RemoveRoleNode returns RemoveRoleNode
 	 *
@@ -463,7 +609,27 @@ public class DslSemanticSequencer extends XbaseSemanticSequencer {
 	
 	/**
 	 * Contexts:
-	 *     RoleNode returns RenewRoleNode
+	 *     RoleNode returns RemoveRoleNode
+	 *
+	 * Constraint:
+	 *     (name=QualifiedName compartmentName=QualifiedName)
+	 */
+	protected void sequence_RemoveRoleNode_RoleNode(ISerializationContext context, RemoveRoleNode semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, DslPackage.Literals.ROLE_NODE__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DslPackage.Literals.ROLE_NODE__NAME));
+			if (transientValues.isValueTransient(semanticObject, DslPackage.Literals.ROLE_NODE__COMPARTMENT_NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DslPackage.Literals.ROLE_NODE__COMPARTMENT_NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getRemoveRoleNodeAccess().getNameQualifiedNameParserRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getRoleNodeAccess().getCompartmentNameQualifiedNameParserRuleCall_2_0(), semanticObject.getCompartmentName());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     RewriteRoleNode returns RenewRoleNode
 	 *     RenewRoleNode returns RenewRoleNode
 	 *
@@ -483,6 +649,27 @@ public class DslSemanticSequencer extends XbaseSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     RoleNode returns RenewRoleNode
+	 *
+	 * Constraint:
+	 *     (name=QualifiedName compartmentName=QualifiedName)
+	 */
+	protected void sequence_RenewRoleNode_RoleNode(ISerializationContext context, RenewRoleNode semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, DslPackage.Literals.ROLE_NODE__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DslPackage.Literals.ROLE_NODE__NAME));
+			if (transientValues.isValueTransient(semanticObject, DslPackage.Literals.ROLE_NODE__COMPARTMENT_NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DslPackage.Literals.ROLE_NODE__COMPARTMENT_NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getRenewRoleNodeAccess().getNameQualifiedNameParserRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getRoleNodeAccess().getCompartmentNameQualifiedNameParserRuleCall_2_0(), semanticObject.getCompartmentName());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     AbstractElement returns StartNode
 	 *     Node returns StartNode
 	 *     ControlNode returns StartNode
@@ -493,8 +680,8 @@ public class DslSemanticSequencer extends XbaseSemanticSequencer {
 	 */
 	protected void sequence_StartNode(ISerializationContext context, StartNode semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, DslPackage.Literals.START_NODE__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DslPackage.Literals.START_NODE__NAME));
+			if (transientValues.isValueTransient(semanticObject, DslPackage.Literals.ABSTRACT_ELEMENT__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DslPackage.Literals.ABSTRACT_ELEMENT__NAME));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getStartNodeAccess().getNameValidIDParserRuleCall_1_0(), semanticObject.getName());
@@ -509,7 +696,7 @@ public class DslSemanticSequencer extends XbaseSemanticSequencer {
 	 *     StoryPatternNode returns StoryPatternNode
 	 *
 	 * Constraint:
-	 *     (name=ValidID className=QualifiedName roleReconfigurations+=RoleNode+)
+	 *     (name=QualifiedName className=QualifiedName roleReconfigurations+=RoleNode+)
 	 */
 	protected void sequence_StoryPatternNode(ISerializationContext context, StoryPatternNode semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -521,7 +708,7 @@ public class DslSemanticSequencer extends XbaseSemanticSequencer {
 	 *     Storyboard returns Storyboard
 	 *
 	 * Constraint:
-	 *     (importedEvents+=Event+ name=ValidID elements+=AbstractElement*)
+	 *     (importedEvents+=Event+ name=QualifiedName elements+=AbstractElement*)
 	 */
 	protected void sequence_Storyboard(ISerializationContext context, Storyboard semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -536,11 +723,11 @@ public class DslSemanticSequencer extends XbaseSemanticSequencer {
 	 * Constraint:
 	 *     (
 	 *         name=ValidID 
+	 *         event=[Event|ID] 
+	 *         guard=Guard? 
 	 *         source=[Node|ID] 
 	 *         sourcePort=StoryPatternPort? 
-	 *         target=[Node|ID] 
-	 *         event=[Event|ID] 
-	 *         guard=XClosure?
+	 *         target=[Node|ID]
 	 *     )
 	 */
 	protected void sequence_Transition(ISerializationContext context, Transition semanticObject) {

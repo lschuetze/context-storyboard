@@ -17,10 +17,12 @@ public class EventManager {
 	 * be fired.
 	 */
 	private Map<String, List<Token>> waitingTokens;
+	private List<Event> waitingEvents;
 
 	public EventManager() {
 		// registeredEvents = new HashMap<>();
 		waitingTokens = new HashMap<>();
+		waitingEvents = new ArrayList<>();
 	}
 
 	// public void register(Event event, String eventType) {
@@ -32,15 +34,19 @@ public class EventManager {
 	// registeredEvents.put(eventType, events);
 	// }
 
-	public void eventOccurance(Event<?> event) {
-		final List<Token> tokens = waitingTokens.get(event.getEventType());
+	public void eventOccurance(Event event) {
+		System.out.println("Event occured: " + event);
+		String eventTypeName = event.getEventClass().getName();
+		final List<Token> tokens = waitingTokens.get(eventTypeName);
 		if (tokens != null) {
 			for (Token token : tokens) {
 				token.setStalled(false);
 				token.carryEvent(event);
 			}
+		} else {
+			waitingEvents.add(event);
 		}
-		waitingTokens.remove(event.getEventType());
+		waitingTokens.remove(eventTypeName);
 	}
 
 	public void addWaitingToken(String eventType, Token token) {
@@ -54,5 +60,20 @@ public class EventManager {
 
 	public void shutdown() {
 		waitingTokens.clear();
+		waitingEvents.clear();
+	}
+
+	public void lookForStaleEvents() {
+		for (Event e : waitingEvents) {
+			String eventName = e.getEventClass().getName();
+			final List<Token> tokens = waitingTokens.get(eventName);
+			if (tokens != null) {
+				for (Token token : tokens) {
+					token.setStalled(false);
+					token.carryEvent(e);
+				}
+			}
+			waitingTokens.remove(e.getEventClass().getName());
+		}
 	}
 }

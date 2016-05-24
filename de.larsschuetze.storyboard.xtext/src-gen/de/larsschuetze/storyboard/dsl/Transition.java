@@ -3,7 +3,6 @@
  */
 package de.larsschuetze.storyboard.dsl;
 
-import org.eclipse.xtext.xbase.XExpression;
 
 /**
  * <!-- begin-user-doc -->
@@ -13,12 +12,11 @@ import org.eclipse.xtext.xbase.XExpression;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.larsschuetze.storyboard.dsl.Transition#getName <em>Name</em>}</li>
+ *   <li>{@link de.larsschuetze.storyboard.dsl.Transition#getEvent <em>Event</em>}</li>
+ *   <li>{@link de.larsschuetze.storyboard.dsl.Transition#getGuard <em>Guard</em>}</li>
  *   <li>{@link de.larsschuetze.storyboard.dsl.Transition#getSource <em>Source</em>}</li>
  *   <li>{@link de.larsschuetze.storyboard.dsl.Transition#getSourcePort <em>Source Port</em>}</li>
  *   <li>{@link de.larsschuetze.storyboard.dsl.Transition#getTarget <em>Target</em>}</li>
- *   <li>{@link de.larsschuetze.storyboard.dsl.Transition#getEvent <em>Event</em>}</li>
- *   <li>{@link de.larsschuetze.storyboard.dsl.Transition#getGuard <em>Guard</em>}</li>
  * </ul>
  * </p>
  *
@@ -29,30 +27,56 @@ import org.eclipse.xtext.xbase.XExpression;
 public interface Transition extends AbstractElement
 {
   /**
-   * Returns the value of the '<em><b>Name</b></em>' attribute.
+   * Returns the value of the '<em><b>Event</b></em>' reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
+   * If the meaning of the '<em>Event</em>' reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Name</em>' attribute.
-   * @see #setName(String)
-   * @see de.larsschuetze.storyboard.dsl.DslPackage#getTransition_Name()
+   * @return the value of the '<em>Event</em>' reference.
+   * @see #setEvent(Event)
+   * @see de.larsschuetze.storyboard.dsl.DslPackage#getTransition_Event()
    * @model
    * @generated
    */
-  String getName();
+  Event getEvent();
 
   /**
-   * Sets the value of the '{@link de.larsschuetze.storyboard.dsl.Transition#getName <em>Name</em>}' attribute.
+   * Sets the value of the '{@link de.larsschuetze.storyboard.dsl.Transition#getEvent <em>Event</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Name</em>' attribute.
-   * @see #getName()
+   * @param value the new value of the '<em>Event</em>' reference.
+   * @see #getEvent()
    * @generated
    */
-  void setName(String value);
+  void setEvent(Event value);
+
+  /**
+   * Returns the value of the '<em><b>Guard</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Guard</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Guard</em>' containment reference.
+   * @see #setGuard(Guard)
+   * @see de.larsschuetze.storyboard.dsl.DslPackage#getTransition_Guard()
+   * @model containment="true"
+   * @generated
+   */
+  Guard getGuard();
+
+  /**
+   * Sets the value of the '{@link de.larsschuetze.storyboard.dsl.Transition#getGuard <em>Guard</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Guard</em>' containment reference.
+   * @see #getGuard()
+   * @generated
+   */
+  void setGuard(Guard value);
 
   /**
    * Returns the value of the '<em><b>Source</b></em>' reference.
@@ -131,57 +155,5 @@ public interface Transition extends AbstractElement
    * @generated
    */
   void setTarget(Node value);
-
-  /**
-   * Returns the value of the '<em><b>Event</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Event</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Event</em>' reference.
-   * @see #setEvent(Event)
-   * @see de.larsschuetze.storyboard.dsl.DslPackage#getTransition_Event()
-   * @model
-   * @generated
-   */
-  Event getEvent();
-
-  /**
-   * Sets the value of the '{@link de.larsschuetze.storyboard.dsl.Transition#getEvent <em>Event</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Event</em>' reference.
-   * @see #getEvent()
-   * @generated
-   */
-  void setEvent(Event value);
-
-  /**
-   * Returns the value of the '<em><b>Guard</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Guard</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Guard</em>' containment reference.
-   * @see #setGuard(XExpression)
-   * @see de.larsschuetze.storyboard.dsl.DslPackage#getTransition_Guard()
-   * @model containment="true"
-   * @generated
-   */
-  XExpression getGuard();
-
-  /**
-   * Sets the value of the '{@link de.larsschuetze.storyboard.dsl.Transition#getGuard <em>Guard</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Guard</em>' containment reference.
-   * @see #getGuard()
-   * @generated
-   */
-  void setGuard(XExpression value);
 
 } // Transition

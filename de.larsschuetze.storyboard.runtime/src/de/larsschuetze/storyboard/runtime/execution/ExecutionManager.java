@@ -5,36 +5,40 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
 
-import de.larsschuetze.storyboard.runtime.library.Event;
+import de.larsschuetze.storyboard.manager.roles.IAdaptModelInstance;
+import de.larsschuetze.storyboard.manager.roles.IQueryModelInstance;
+import de.larsschuetze.storyboard.runtime.execution.execution.EventManager;
+import de.larsschuetze.storyboard.runtime.execution.execution.TokenManager;
 import de.larsschuetze.storyboard.runtime.library.Storyboard;
 import de.larsschuetze.storyboard.runtime.library.StoryboardElement;
 import de.larsschuetze.storyboard.runtime.library.Token;
-import de.larsschuetze.storyboard.runtime.execution.execution.AdaptionManager;
-import de.larsschuetze.storyboard.runtime.execution.execution.EventManager;
-import de.larsschuetze.storyboard.runtime.execution.execution.TokenManager;
 
 public class ExecutionManager {
 
-	private AdaptionManager adaptionManager;
 	private EventManager eventManager;
 	private TokenManager tokenManager;
 	private Map<Token, StoryboardElement> nextTokenLocations;
 	private Map<Token, StoryboardElement> lastTokenLocations;
+	private IQueryModelInstance modelInstanceQuery;
+	private IAdaptModelInstance adaptModelInstance;
 	private Queue<Token> executionQueue;
 	private volatile boolean isRunning;
 
-	public ExecutionManager(EventManager eventManager) {
+	public ExecutionManager(IQueryModelInstance modelInstanceQuery,
+			IAdaptModelInstance adaptModelInstance) {
 		this.nextTokenLocations = new HashMap<>();
 		this.lastTokenLocations = new HashMap<>();
+		this.modelInstanceQuery = modelInstanceQuery;
+		this.adaptModelInstance = adaptModelInstance;
+		this.eventManager = new EventManager();
 		this.tokenManager = new TokenManager(eventManager);
-		this.eventManager = eventManager;
-		this.adaptionManager = new AdaptionManager();
-		// Switch to priority queue when event management is implemented
+		// Switch to priority queue later
 		this.executionQueue = new LinkedList<>();
 		this.isRunning = false;
 	}
 
 	public void nextOperation() {
+		eventManager.lookForStaleEvents();
 		Token nextToken = executionQueue.poll();
 		if (!nextToken.isStalled()) {
 			// Check if removal is needed
@@ -56,6 +60,7 @@ public class ExecutionManager {
 	}
 
 	public void execute(Storyboard storyboard) {
+		System.out.println("Starting ...");
 		isRunning = true;
 		yield(tokenManager.createToken(), storyboard.getStartNode());
 		while (!executionQueue.isEmpty() && isRunning) {
@@ -72,5 +77,19 @@ public class ExecutionManager {
 
 	public void stop() {
 		isRunning = false;
+		System.out.println("Stopping ...");
+	}
+
+	public IQueryModelInstance getModelInstanceQuery() {
+		return modelInstanceQuery;
+	}
+
+	public IAdaptModelInstance getModelInstanceAdapter() {
+		return adaptModelInstance;
+	}
+	
+	//TODO: Fassade
+	public EventManager getEventManager() {
+		return eventManager;
 	}
 }

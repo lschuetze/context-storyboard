@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link de.larsschuetze.storyboard.dsl.impl.RoleNodeImpl#getCompartmentName <em>Compartment Name</em>}</li>
  *   <li>{@link de.larsschuetze.storyboard.dsl.impl.RoleNodeImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
@@ -28,6 +29,26 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  */
 public class RoleNodeImpl extends MinimalEObjectImpl.Container implements RoleNode
 {
+  /**
+   * The default value of the '{@link #getCompartmentName() <em>Compartment Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getCompartmentName()
+   * @generated
+   * @ordered
+   */
+  protected static final String COMPARTMENT_NAME_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getCompartmentName() <em>Compartment Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getCompartmentName()
+   * @generated
+   * @ordered
+   */
+  protected String compartmentName = COMPARTMENT_NAME_EDEFAULT;
+
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -74,6 +95,29 @@ public class RoleNodeImpl extends MinimalEObjectImpl.Container implements RoleNo
    * <!-- end-user-doc -->
    * @generated
    */
+  public String getCompartmentName()
+  {
+    return compartmentName;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setCompartmentName(String newCompartmentName)
+  {
+    String oldCompartmentName = compartmentName;
+    compartmentName = newCompartmentName;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, DslPackage.ROLE_NODE__COMPARTMENT_NAME, oldCompartmentName, compartmentName));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public String getName()
   {
     return name;
@@ -102,6 +146,8 @@ public class RoleNodeImpl extends MinimalEObjectImpl.Container implements RoleNo
   {
     switch (featureID)
     {
+      case DslPackage.ROLE_NODE__COMPARTMENT_NAME:
+        return getCompartmentName();
       case DslPackage.ROLE_NODE__NAME:
         return getName();
     }
@@ -118,6 +164,9 @@ public class RoleNodeImpl extends MinimalEObjectImpl.Container implements RoleNo
   {
     switch (featureID)
     {
+      case DslPackage.ROLE_NODE__COMPARTMENT_NAME:
+        setCompartmentName((String)newValue);
+        return;
       case DslPackage.ROLE_NODE__NAME:
         setName((String)newValue);
         return;
@@ -135,6 +184,9 @@ public class RoleNodeImpl extends MinimalEObjectImpl.Container implements RoleNo
   {
     switch (featureID)
     {
+      case DslPackage.ROLE_NODE__COMPARTMENT_NAME:
+        setCompartmentName(COMPARTMENT_NAME_EDEFAULT);
+        return;
       case DslPackage.ROLE_NODE__NAME:
         setName(NAME_EDEFAULT);
         return;
@@ -152,6 +204,8 @@ public class RoleNodeImpl extends MinimalEObjectImpl.Container implements RoleNo
   {
     switch (featureID)
     {
+      case DslPackage.ROLE_NODE__COMPARTMENT_NAME:
+        return COMPARTMENT_NAME_EDEFAULT == null ? compartmentName != null : !COMPARTMENT_NAME_EDEFAULT.equals(compartmentName);
       case DslPackage.ROLE_NODE__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
     }
@@ -169,7 +223,9 @@ public class RoleNodeImpl extends MinimalEObjectImpl.Container implements RoleNo
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (name: ");
+    result.append(" (compartmentName: ");
+    result.append(compartmentName);
+    result.append(", name: ");
     result.append(name);
     result.append(')');
     return result.toString();

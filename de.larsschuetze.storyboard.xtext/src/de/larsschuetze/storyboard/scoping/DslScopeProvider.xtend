@@ -17,4 +17,6 @@ class DslScopeProvider extends AbstractDslScopeProvider {
 	override getScope(EObject context, EReference reference) {
 		return super.getScope(context, reference)
 	}
+	
+	
 }

@@ -16,7 +16,8 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.emf.common,
  org.eclipse.xtext.common.types,
  org.eclipse.xtext.xbase.lib,
- de.larsschuetze.storyboard.runtime;bundle-version="1.0.0";visibility:=reexport
+ de.larsschuetze.storyboard.model.crom;bundle-version="1.0.0",
+ de.larsschuetze.storyboard.manager;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: de.larsschuetze.storyboard.parser.antlr,
  de.larsschuetze.storyboard.serializer,

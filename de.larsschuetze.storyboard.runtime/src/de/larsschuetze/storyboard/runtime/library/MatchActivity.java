@@ -3,20 +3,28 @@ package de.larsschuetze.storyboard.runtime.library;
 public class MatchActivity extends Activity {
 
 	private Matcher matcher;
+	private Adapter adapter;
 	private Token currentToken;
 
-	public MatchActivity(Matcher matcher) {
+	public MatchActivity(Matcher matcher, Adapter adapter) {
 		this.matcher = matcher;
+		this.adapter = adapter;
 	}
 
 	@Override
 	public void execute() {
-		if (matcher.execute()) {
-			fire(currentToken);
+		if (matcher.execute(runtime.getModelInstanceQuery())) {
+			adapt();
+			fireSuccess(currentToken);
 		} else {
-			currentToken.destroy();
+			fireFailure(currentToken);
 		}
-		currentToken = null;
+	}
+
+	private void adapt() {
+		adapter.adapt(matcher.getMatchResult(),
+				runtime.getModelInstanceAdapter(),
+				runtime.getModelInstanceQuery());
 	}
 
 	@Override

@@ -9,7 +9,9 @@ import de.larsschuetze.storyboard.dsl.ConditionRoleNode;
 import de.larsschuetze.storyboard.dsl.ControlNode;
 import de.larsschuetze.storyboard.dsl.DslFactory;
 import de.larsschuetze.storyboard.dsl.DslPackage;
+import de.larsschuetze.storyboard.dsl.EndNode;
 import de.larsschuetze.storyboard.dsl.Event;
+import de.larsschuetze.storyboard.dsl.Guard;
 import de.larsschuetze.storyboard.dsl.Node;
 import de.larsschuetze.storyboard.dsl.PlayRoleNode;
 import de.larsschuetze.storyboard.dsl.ProhibitedRoleNode;
@@ -30,8 +32,6 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.eclipse.xtext.common.types.TypesPackage;
-
-import org.eclipse.xtext.xbase.XbasePackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -81,6 +81,13 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass endNodeEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass eventEClass = null;
 
   /**
@@ -89,6 +96,13 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage
    * @generated
    */
   private EClass transitionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass guardEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -202,7 +216,7 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage
     isInited = true;
 
     // Initialize simple dependencies
-    XbasePackage.eINSTANCE.eClass();
+    TypesPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theDslPackage.createPackageContents();
@@ -274,6 +288,16 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getAbstractElement_Name()
+  {
+    return (EAttribute)abstractElementEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getNode()
   {
     return nodeEClass;
@@ -304,9 +328,9 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getStartNode_Name()
+  public EClass getEndNode()
   {
-    return (EAttribute)startNodeEClass.getEStructuralFeatures().get(0);
+    return endNodeEClass;
   }
 
   /**
@@ -354,49 +378,9 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getTransition_Name()
-  {
-    return (EAttribute)transitionEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getTransition_Source()
-  {
-    return (EReference)transitionEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getTransition_SourcePort()
-  {
-    return (EAttribute)transitionEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getTransition_Target()
-  {
-    return (EReference)transitionEClass.getEStructuralFeatures().get(3);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EReference getTransition_Event()
   {
-    return (EReference)transitionEClass.getEStructuralFeatures().get(4);
+    return (EReference)transitionEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -406,7 +390,57 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage
    */
   public EReference getTransition_Guard()
   {
-    return (EReference)transitionEClass.getEStructuralFeatures().get(5);
+    return (EReference)transitionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getTransition_Source()
+  {
+    return (EReference)transitionEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getTransition_SourcePort()
+  {
+    return (EAttribute)transitionEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getTransition_Target()
+  {
+    return (EReference)transitionEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getGuard()
+  {
+    return guardEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getGuard_Guard()
+  {
+    return (EAttribute)guardEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -424,7 +458,7 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getStoryPatternNode_Name()
+  public EAttribute getStoryPatternNode_ClassName()
   {
     return (EAttribute)storyPatternNodeEClass.getEStructuralFeatures().get(0);
   }
@@ -434,19 +468,9 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getStoryPatternNode_ClassName()
-  {
-    return (EAttribute)storyPatternNodeEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EReference getStoryPatternNode_RoleReconfigurations()
   {
-    return (EReference)storyPatternNodeEClass.getEStructuralFeatures().get(2);
+    return (EReference)storyPatternNodeEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -464,9 +488,19 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getRoleNode_Name()
+  public EAttribute getRoleNode_CompartmentName()
   {
     return (EAttribute)roleNodeEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getRoleNode_Name()
+  {
+    return (EAttribute)roleNodeEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -575,32 +609,36 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage
     createEReference(storyboardEClass, STORYBOARD__ELEMENTS);
 
     abstractElementEClass = createEClass(ABSTRACT_ELEMENT);
+    createEAttribute(abstractElementEClass, ABSTRACT_ELEMENT__NAME);
 
     nodeEClass = createEClass(NODE);
 
     controlNodeEClass = createEClass(CONTROL_NODE);
 
     startNodeEClass = createEClass(START_NODE);
-    createEAttribute(startNodeEClass, START_NODE__NAME);
+
+    endNodeEClass = createEClass(END_NODE);
 
     eventEClass = createEClass(EVENT);
     createEReference(eventEClass, EVENT__EVENT_TYPE);
     createEAttribute(eventEClass, EVENT__NAME);
 
     transitionEClass = createEClass(TRANSITION);
-    createEAttribute(transitionEClass, TRANSITION__NAME);
+    createEReference(transitionEClass, TRANSITION__EVENT);
+    createEReference(transitionEClass, TRANSITION__GUARD);
     createEReference(transitionEClass, TRANSITION__SOURCE);
     createEAttribute(transitionEClass, TRANSITION__SOURCE_PORT);
     createEReference(transitionEClass, TRANSITION__TARGET);
-    createEReference(transitionEClass, TRANSITION__EVENT);
-    createEReference(transitionEClass, TRANSITION__GUARD);
+
+    guardEClass = createEClass(GUARD);
+    createEAttribute(guardEClass, GUARD__GUARD);
 
     storyPatternNodeEClass = createEClass(STORY_PATTERN_NODE);
-    createEAttribute(storyPatternNodeEClass, STORY_PATTERN_NODE__NAME);
     createEAttribute(storyPatternNodeEClass, STORY_PATTERN_NODE__CLASS_NAME);
     createEReference(storyPatternNodeEClass, STORY_PATTERN_NODE__ROLE_RECONFIGURATIONS);
 
     roleNodeEClass = createEClass(ROLE_NODE);
+    createEAttribute(roleNodeEClass, ROLE_NODE__COMPARTMENT_NAME);
     createEAttribute(roleNodeEClass, ROLE_NODE__NAME);
 
     rewriteRoleNodeEClass = createEClass(REWRITE_ROLE_NODE);
@@ -644,7 +682,6 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage
 
     // Obtain other dependent packages
     TypesPackage theTypesPackage = (TypesPackage)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI);
-    XbasePackage theXbasePackage = (XbasePackage)EPackage.Registry.INSTANCE.getEPackage(XbasePackage.eNS_URI);
 
     // Create type parameters
 
@@ -654,6 +691,7 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage
     nodeEClass.getESuperTypes().add(this.getAbstractElement());
     controlNodeEClass.getESuperTypes().add(this.getNode());
     startNodeEClass.getESuperTypes().add(this.getControlNode());
+    endNodeEClass.getESuperTypes().add(this.getControlNode());
     transitionEClass.getESuperTypes().add(this.getAbstractElement());
     storyPatternNodeEClass.getESuperTypes().add(this.getNode());
     rewriteRoleNodeEClass.getESuperTypes().add(this.getRoleNode());
@@ -671,32 +709,36 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage
     initEReference(getStoryboard_Elements(), this.getAbstractElement(), null, "elements", null, 0, -1, Storyboard.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(abstractElementEClass, AbstractElement.class, "AbstractElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getAbstractElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, AbstractElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(nodeEClass, Node.class, "Node", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(controlNodeEClass, ControlNode.class, "ControlNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(startNodeEClass, StartNode.class, "StartNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getStartNode_Name(), ecorePackage.getEString(), "name", null, 0, 1, StartNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(endNodeEClass, EndNode.class, "EndNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(eventEClass, Event.class, "Event", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEvent_EventType(), theTypesPackage.getJvmTypeReference(), null, "eventType", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEvent_Name(), ecorePackage.getEString(), "name", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(transitionEClass, Transition.class, "Transition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getTransition_Name(), ecorePackage.getEString(), "name", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getTransition_Event(), this.getEvent(), null, "event", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getTransition_Guard(), this.getGuard(), null, "guard", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getTransition_Source(), this.getNode(), null, "source", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getTransition_SourcePort(), ecorePackage.getEString(), "sourcePort", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getTransition_Target(), this.getNode(), null, "target", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getTransition_Event(), this.getEvent(), null, "event", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getTransition_Guard(), theXbasePackage.getXExpression(), null, "guard", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(guardEClass, Guard.class, "Guard", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getGuard_Guard(), ecorePackage.getEString(), "guard", null, 0, 1, Guard.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(storyPatternNodeEClass, StoryPatternNode.class, "StoryPatternNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getStoryPatternNode_Name(), ecorePackage.getEString(), "name", null, 0, 1, StoryPatternNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getStoryPatternNode_ClassName(), ecorePackage.getEString(), "className", null, 0, 1, StoryPatternNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getStoryPatternNode_RoleReconfigurations(), this.getRoleNode(), null, "roleReconfigurations", null, 0, -1, StoryPatternNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(roleNodeEClass, RoleNode.class, "RoleNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getRoleNode_CompartmentName(), ecorePackage.getEString(), "compartmentName", null, 0, 1, RoleNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getRoleNode_Name(), ecorePackage.getEString(), "name", null, 0, 1, RoleNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(rewriteRoleNodeEClass, RewriteRoleNode.class, "RewriteRoleNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

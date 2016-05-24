@@ -29,7 +29,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.larsschuetze.storyboard.dsl.impl.StoryPatternNodeImpl#getName <em>Name</em>}</li>
  *   <li>{@link de.larsschuetze.storyboard.dsl.impl.StoryPatternNodeImpl#getClassName <em>Class Name</em>}</li>
  *   <li>{@link de.larsschuetze.storyboard.dsl.impl.StoryPatternNodeImpl#getRoleReconfigurations <em>Role Reconfigurations</em>}</li>
  * </ul>
@@ -39,26 +38,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class StoryPatternNodeImpl extends NodeImpl implements StoryPatternNode
 {
-  /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected static final String NAME_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected String name = NAME_EDEFAULT;
-
   /**
    * The default value of the '{@link #getClassName() <em>Class Name</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -108,29 +87,6 @@ public class StoryPatternNodeImpl extends NodeImpl implements StoryPatternNode
   protected EClass eStaticClass()
   {
     return DslPackage.Literals.STORY_PATTERN_NODE;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String getName()
-  {
-    return name;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setName(String newName)
-  {
-    String oldName = name;
-    name = newName;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, DslPackage.STORY_PATTERN_NODE__NAME, oldName, name));
   }
 
   /**
@@ -196,8 +152,6 @@ public class StoryPatternNodeImpl extends NodeImpl implements StoryPatternNode
   {
     switch (featureID)
     {
-      case DslPackage.STORY_PATTERN_NODE__NAME:
-        return getName();
       case DslPackage.STORY_PATTERN_NODE__CLASS_NAME:
         return getClassName();
       case DslPackage.STORY_PATTERN_NODE__ROLE_RECONFIGURATIONS:
@@ -217,9 +171,6 @@ public class StoryPatternNodeImpl extends NodeImpl implements StoryPatternNode
   {
     switch (featureID)
     {
-      case DslPackage.STORY_PATTERN_NODE__NAME:
-        setName((String)newValue);
-        return;
       case DslPackage.STORY_PATTERN_NODE__CLASS_NAME:
         setClassName((String)newValue);
         return;
@@ -241,9 +192,6 @@ public class StoryPatternNodeImpl extends NodeImpl implements StoryPatternNode
   {
     switch (featureID)
     {
-      case DslPackage.STORY_PATTERN_NODE__NAME:
-        setName(NAME_EDEFAULT);
-        return;
       case DslPackage.STORY_PATTERN_NODE__CLASS_NAME:
         setClassName(CLASS_NAME_EDEFAULT);
         return;
@@ -264,8 +212,6 @@ public class StoryPatternNodeImpl extends NodeImpl implements StoryPatternNode
   {
     switch (featureID)
     {
-      case DslPackage.STORY_PATTERN_NODE__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case DslPackage.STORY_PATTERN_NODE__CLASS_NAME:
         return CLASS_NAME_EDEFAULT == null ? className != null : !CLASS_NAME_EDEFAULT.equals(className);
       case DslPackage.STORY_PATTERN_NODE__ROLE_RECONFIGURATIONS:
@@ -285,9 +231,7 @@ public class StoryPatternNodeImpl extends NodeImpl implements StoryPatternNode
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (name: ");
-    result.append(name);
-    result.append(", className: ");
+    result.append(" (className: ");
     result.append(className);
     result.append(')');
     return result.toString();

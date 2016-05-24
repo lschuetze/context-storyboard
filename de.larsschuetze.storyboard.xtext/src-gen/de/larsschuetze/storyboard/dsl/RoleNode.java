@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link de.larsschuetze.storyboard.dsl.RoleNode#getCompartmentName <em>Compartment Name</em>}</li>
  *   <li>{@link de.larsschuetze.storyboard.dsl.RoleNode#getName <em>Name</em>}</li>
  * </ul>
  * </p>
@@ -23,6 +24,32 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface RoleNode extends EObject
 {
+  /**
+   * Returns the value of the '<em><b>Compartment Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Compartment Name</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Compartment Name</em>' attribute.
+   * @see #setCompartmentName(String)
+   * @see de.larsschuetze.storyboard.dsl.DslPackage#getRoleNode_CompartmentName()
+   * @model
+   * @generated
+   */
+  String getCompartmentName();
+
+  /**
+   * Sets the value of the '{@link de.larsschuetze.storyboard.dsl.RoleNode#getCompartmentName <em>Compartment Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Compartment Name</em>' attribute.
+   * @see #getCompartmentName()
+   * @generated
+   */
+  void setCompartmentName(String value);
+
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->

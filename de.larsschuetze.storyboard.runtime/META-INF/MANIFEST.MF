@@ -4,6 +4,13 @@ Bundle-Name: Runtime
 Bundle-SymbolicName: de.larsschuetze.storyboard.runtime
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: de.larsschuetze.storyboard.runtime.Activator
-Require-Bundle: org.eclipse.core.runtime
+Require-Bundle: org.eclipse.core.runtime,
+ de.larsschuetze.storyboard.manager,
+ de.larsschuetze.storyboard.model.crom
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
+Export-Package: de.larsschuetze.storyboard.runtime,
+ de.larsschuetze.storyboard.runtime.execution,
+ de.larsschuetze.storyboard.runtime.execution.execution,
+ de.larsschuetze.storyboard.runtime.library
+Bundle-ClassPath: .

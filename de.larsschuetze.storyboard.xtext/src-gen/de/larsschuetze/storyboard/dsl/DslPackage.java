@@ -114,13 +114,22 @@ public interface DslPackage extends EPackage
   int ABSTRACT_ELEMENT = 1;
 
   /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ABSTRACT_ELEMENT__NAME = 0;
+
+  /**
    * The number of structural features of the '<em>Abstract Element</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ABSTRACT_ELEMENT_FEATURE_COUNT = 0;
+  int ABSTRACT_ELEMENT_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link de.larsschuetze.storyboard.dsl.impl.NodeImpl <em>Node</em>}' class.
@@ -131,6 +140,15 @@ public interface DslPackage extends EPackage
    * @generated
    */
   int NODE = 2;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NODE__NAME = ABSTRACT_ELEMENT__NAME;
 
   /**
    * The number of structural features of the '<em>Node</em>' class.
@@ -150,6 +168,15 @@ public interface DslPackage extends EPackage
    * @generated
    */
   int CONTROL_NODE = 3;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONTROL_NODE__NAME = NODE__NAME;
 
   /**
    * The number of structural features of the '<em>Control Node</em>' class.
@@ -177,7 +204,7 @@ public interface DslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int START_NODE__NAME = CONTROL_NODE_FEATURE_COUNT + 0;
+  int START_NODE__NAME = CONTROL_NODE__NAME;
 
   /**
    * The number of structural features of the '<em>Start Node</em>' class.
@@ -186,7 +213,35 @@ public interface DslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int START_NODE_FEATURE_COUNT = CONTROL_NODE_FEATURE_COUNT + 1;
+  int START_NODE_FEATURE_COUNT = CONTROL_NODE_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link de.larsschuetze.storyboard.dsl.impl.EndNodeImpl <em>End Node</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.larsschuetze.storyboard.dsl.impl.EndNodeImpl
+   * @see de.larsschuetze.storyboard.dsl.impl.DslPackageImpl#getEndNode()
+   * @generated
+   */
+  int END_NODE = 5;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int END_NODE__NAME = CONTROL_NODE__NAME;
+
+  /**
+   * The number of structural features of the '<em>End Node</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int END_NODE_FEATURE_COUNT = CONTROL_NODE_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link de.larsschuetze.storyboard.dsl.impl.EventImpl <em>Event</em>}' class.
@@ -196,7 +251,7 @@ public interface DslPackage extends EPackage
    * @see de.larsschuetze.storyboard.dsl.impl.DslPackageImpl#getEvent()
    * @generated
    */
-  int EVENT = 5;
+  int EVENT = 6;
 
   /**
    * The feature id for the '<em><b>Event Type</b></em>' containment reference.
@@ -233,7 +288,7 @@ public interface DslPackage extends EPackage
    * @see de.larsschuetze.storyboard.dsl.impl.DslPackageImpl#getTransition()
    * @generated
    */
-  int TRANSITION = 6;
+  int TRANSITION = 7;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -242,34 +297,7 @@ public interface DslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TRANSITION__NAME = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Source</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRANSITION__SOURCE = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
-
-  /**
-   * The feature id for the '<em><b>Source Port</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRANSITION__SOURCE_PORT = ABSTRACT_ELEMENT_FEATURE_COUNT + 2;
-
-  /**
-   * The feature id for the '<em><b>Target</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRANSITION__TARGET = ABSTRACT_ELEMENT_FEATURE_COUNT + 3;
+  int TRANSITION__NAME = ABSTRACT_ELEMENT__NAME;
 
   /**
    * The feature id for the '<em><b>Event</b></em>' reference.
@@ -278,7 +306,7 @@ public interface DslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TRANSITION__EVENT = ABSTRACT_ELEMENT_FEATURE_COUNT + 4;
+  int TRANSITION__EVENT = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Guard</b></em>' containment reference.
@@ -287,7 +315,34 @@ public interface DslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TRANSITION__GUARD = ABSTRACT_ELEMENT_FEATURE_COUNT + 5;
+  int TRANSITION__GUARD = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Source</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSITION__SOURCE = ABSTRACT_ELEMENT_FEATURE_COUNT + 2;
+
+  /**
+   * The feature id for the '<em><b>Source Port</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSITION__SOURCE_PORT = ABSTRACT_ELEMENT_FEATURE_COUNT + 3;
+
+  /**
+   * The feature id for the '<em><b>Target</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSITION__TARGET = ABSTRACT_ELEMENT_FEATURE_COUNT + 4;
 
   /**
    * The number of structural features of the '<em>Transition</em>' class.
@@ -296,7 +351,35 @@ public interface DslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TRANSITION_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 6;
+  int TRANSITION_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 5;
+
+  /**
+   * The meta object id for the '{@link de.larsschuetze.storyboard.dsl.impl.GuardImpl <em>Guard</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.larsschuetze.storyboard.dsl.impl.GuardImpl
+   * @see de.larsschuetze.storyboard.dsl.impl.DslPackageImpl#getGuard()
+   * @generated
+   */
+  int GUARD = 8;
+
+  /**
+   * The feature id for the '<em><b>Guard</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GUARD__GUARD = 0;
+
+  /**
+   * The number of structural features of the '<em>Guard</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GUARD_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link de.larsschuetze.storyboard.dsl.impl.StoryPatternNodeImpl <em>Story Pattern Node</em>}' class.
@@ -306,7 +389,7 @@ public interface DslPackage extends EPackage
    * @see de.larsschuetze.storyboard.dsl.impl.DslPackageImpl#getStoryPatternNode()
    * @generated
    */
-  int STORY_PATTERN_NODE = 7;
+  int STORY_PATTERN_NODE = 9;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -315,7 +398,7 @@ public interface DslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int STORY_PATTERN_NODE__NAME = NODE_FEATURE_COUNT + 0;
+  int STORY_PATTERN_NODE__NAME = NODE__NAME;
 
   /**
    * The feature id for the '<em><b>Class Name</b></em>' attribute.
@@ -324,7 +407,7 @@ public interface DslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int STORY_PATTERN_NODE__CLASS_NAME = NODE_FEATURE_COUNT + 1;
+  int STORY_PATTERN_NODE__CLASS_NAME = NODE_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Role Reconfigurations</b></em>' containment reference list.
@@ -333,7 +416,7 @@ public interface DslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int STORY_PATTERN_NODE__ROLE_RECONFIGURATIONS = NODE_FEATURE_COUNT + 2;
+  int STORY_PATTERN_NODE__ROLE_RECONFIGURATIONS = NODE_FEATURE_COUNT + 1;
 
   /**
    * The number of structural features of the '<em>Story Pattern Node</em>' class.
@@ -342,7 +425,7 @@ public interface DslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int STORY_PATTERN_NODE_FEATURE_COUNT = NODE_FEATURE_COUNT + 3;
+  int STORY_PATTERN_NODE_FEATURE_COUNT = NODE_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link de.larsschuetze.storyboard.dsl.impl.RoleNodeImpl <em>Role Node</em>}' class.
@@ -352,7 +435,16 @@ public interface DslPackage extends EPackage
    * @see de.larsschuetze.storyboard.dsl.impl.DslPackageImpl#getRoleNode()
    * @generated
    */
-  int ROLE_NODE = 8;
+  int ROLE_NODE = 10;
+
+  /**
+   * The feature id for the '<em><b>Compartment Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ROLE_NODE__COMPARTMENT_NAME = 0;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -361,7 +453,7 @@ public interface DslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ROLE_NODE__NAME = 0;
+  int ROLE_NODE__NAME = 1;
 
   /**
    * The number of structural features of the '<em>Role Node</em>' class.
@@ -370,7 +462,7 @@ public interface DslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ROLE_NODE_FEATURE_COUNT = 1;
+  int ROLE_NODE_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link de.larsschuetze.storyboard.dsl.impl.RewriteRoleNodeImpl <em>Rewrite Role Node</em>}' class.
@@ -380,7 +472,16 @@ public interface DslPackage extends EPackage
    * @see de.larsschuetze.storyboard.dsl.impl.DslPackageImpl#getRewriteRoleNode()
    * @generated
    */
-  int REWRITE_ROLE_NODE = 9;
+  int REWRITE_ROLE_NODE = 11;
+
+  /**
+   * The feature id for the '<em><b>Compartment Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REWRITE_ROLE_NODE__COMPARTMENT_NAME = ROLE_NODE__COMPARTMENT_NAME;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -408,7 +509,16 @@ public interface DslPackage extends EPackage
    * @see de.larsschuetze.storyboard.dsl.impl.DslPackageImpl#getRemoveRoleNode()
    * @generated
    */
-  int REMOVE_ROLE_NODE = 10;
+  int REMOVE_ROLE_NODE = 12;
+
+  /**
+   * The feature id for the '<em><b>Compartment Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REMOVE_ROLE_NODE__COMPARTMENT_NAME = REWRITE_ROLE_NODE__COMPARTMENT_NAME;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -436,7 +546,16 @@ public interface DslPackage extends EPackage
    * @see de.larsschuetze.storyboard.dsl.impl.DslPackageImpl#getRenewRoleNode()
    * @generated
    */
-  int RENEW_ROLE_NODE = 11;
+  int RENEW_ROLE_NODE = 13;
+
+  /**
+   * The feature id for the '<em><b>Compartment Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RENEW_ROLE_NODE__COMPARTMENT_NAME = REWRITE_ROLE_NODE__COMPARTMENT_NAME;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -464,7 +583,16 @@ public interface DslPackage extends EPackage
    * @see de.larsschuetze.storyboard.dsl.impl.DslPackageImpl#getAddRoleNode()
    * @generated
    */
-  int ADD_ROLE_NODE = 12;
+  int ADD_ROLE_NODE = 14;
+
+  /**
+   * The feature id for the '<em><b>Compartment Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ADD_ROLE_NODE__COMPARTMENT_NAME = REWRITE_ROLE_NODE__COMPARTMENT_NAME;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -492,7 +620,16 @@ public interface DslPackage extends EPackage
    * @see de.larsschuetze.storyboard.dsl.impl.DslPackageImpl#getConditionRoleNode()
    * @generated
    */
-  int CONDITION_ROLE_NODE = 13;
+  int CONDITION_ROLE_NODE = 15;
+
+  /**
+   * The feature id for the '<em><b>Compartment Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONDITION_ROLE_NODE__COMPARTMENT_NAME = ROLE_NODE__COMPARTMENT_NAME;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -520,7 +657,16 @@ public interface DslPackage extends EPackage
    * @see de.larsschuetze.storyboard.dsl.impl.DslPackageImpl#getProhibitedRoleNode()
    * @generated
    */
-  int PROHIBITED_ROLE_NODE = 14;
+  int PROHIBITED_ROLE_NODE = 16;
+
+  /**
+   * The feature id for the '<em><b>Compartment Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PROHIBITED_ROLE_NODE__COMPARTMENT_NAME = CONDITION_ROLE_NODE__COMPARTMENT_NAME;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -548,7 +694,16 @@ public interface DslPackage extends EPackage
    * @see de.larsschuetze.storyboard.dsl.impl.DslPackageImpl#getPlayRoleNode()
    * @generated
    */
-  int PLAY_ROLE_NODE = 15;
+  int PLAY_ROLE_NODE = 17;
+
+  /**
+   * The feature id for the '<em><b>Compartment Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PLAY_ROLE_NODE__COMPARTMENT_NAME = CONDITION_ROLE_NODE__COMPARTMENT_NAME;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -623,6 +778,17 @@ public interface DslPackage extends EPackage
   EClass getAbstractElement();
 
   /**
+   * Returns the meta object for the attribute '{@link de.larsschuetze.storyboard.dsl.AbstractElement#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see de.larsschuetze.storyboard.dsl.AbstractElement#getName()
+   * @see #getAbstractElement()
+   * @generated
+   */
+  EAttribute getAbstractElement_Name();
+
+  /**
    * Returns the meta object for class '{@link de.larsschuetze.storyboard.dsl.Node <em>Node</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -653,15 +819,14 @@ public interface DslPackage extends EPackage
   EClass getStartNode();
 
   /**
-   * Returns the meta object for the attribute '{@link de.larsschuetze.storyboard.dsl.StartNode#getName <em>Name</em>}'.
+   * Returns the meta object for class '{@link de.larsschuetze.storyboard.dsl.EndNode <em>End Node</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see de.larsschuetze.storyboard.dsl.StartNode#getName()
-   * @see #getStartNode()
+   * @return the meta object for class '<em>End Node</em>'.
+   * @see de.larsschuetze.storyboard.dsl.EndNode
    * @generated
    */
-  EAttribute getStartNode_Name();
+  EClass getEndNode();
 
   /**
    * Returns the meta object for class '{@link de.larsschuetze.storyboard.dsl.Event <em>Event</em>}'.
@@ -706,15 +871,26 @@ public interface DslPackage extends EPackage
   EClass getTransition();
 
   /**
-   * Returns the meta object for the attribute '{@link de.larsschuetze.storyboard.dsl.Transition#getName <em>Name</em>}'.
+   * Returns the meta object for the reference '{@link de.larsschuetze.storyboard.dsl.Transition#getEvent <em>Event</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see de.larsschuetze.storyboard.dsl.Transition#getName()
+   * @return the meta object for the reference '<em>Event</em>'.
+   * @see de.larsschuetze.storyboard.dsl.Transition#getEvent()
    * @see #getTransition()
    * @generated
    */
-  EAttribute getTransition_Name();
+  EReference getTransition_Event();
+
+  /**
+   * Returns the meta object for the containment reference '{@link de.larsschuetze.storyboard.dsl.Transition#getGuard <em>Guard</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Guard</em>'.
+   * @see de.larsschuetze.storyboard.dsl.Transition#getGuard()
+   * @see #getTransition()
+   * @generated
+   */
+  EReference getTransition_Guard();
 
   /**
    * Returns the meta object for the reference '{@link de.larsschuetze.storyboard.dsl.Transition#getSource <em>Source</em>}'.
@@ -750,26 +926,25 @@ public interface DslPackage extends EPackage
   EReference getTransition_Target();
 
   /**
-   * Returns the meta object for the reference '{@link de.larsschuetze.storyboard.dsl.Transition#getEvent <em>Event</em>}'.
+   * Returns the meta object for class '{@link de.larsschuetze.storyboard.dsl.Guard <em>Guard</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Event</em>'.
-   * @see de.larsschuetze.storyboard.dsl.Transition#getEvent()
-   * @see #getTransition()
+   * @return the meta object for class '<em>Guard</em>'.
+   * @see de.larsschuetze.storyboard.dsl.Guard
    * @generated
    */
-  EReference getTransition_Event();
+  EClass getGuard();
 
   /**
-   * Returns the meta object for the containment reference '{@link de.larsschuetze.storyboard.dsl.Transition#getGuard <em>Guard</em>}'.
+   * Returns the meta object for the attribute '{@link de.larsschuetze.storyboard.dsl.Guard#getGuard <em>Guard</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Guard</em>'.
-   * @see de.larsschuetze.storyboard.dsl.Transition#getGuard()
-   * @see #getTransition()
+   * @return the meta object for the attribute '<em>Guard</em>'.
+   * @see de.larsschuetze.storyboard.dsl.Guard#getGuard()
+   * @see #getGuard()
    * @generated
    */
-  EReference getTransition_Guard();
+  EAttribute getGuard_Guard();
 
   /**
    * Returns the meta object for class '{@link de.larsschuetze.storyboard.dsl.StoryPatternNode <em>Story Pattern Node</em>}'.
@@ -780,17 +955,6 @@ public interface DslPackage extends EPackage
    * @generated
    */
   EClass getStoryPatternNode();
-
-  /**
-   * Returns the meta object for the attribute '{@link de.larsschuetze.storyboard.dsl.StoryPatternNode#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see de.larsschuetze.storyboard.dsl.StoryPatternNode#getName()
-   * @see #getStoryPatternNode()
-   * @generated
-   */
-  EAttribute getStoryPatternNode_Name();
 
   /**
    * Returns the meta object for the attribute '{@link de.larsschuetze.storyboard.dsl.StoryPatternNode#getClassName <em>Class Name</em>}'.
@@ -823,6 +987,17 @@ public interface DslPackage extends EPackage
    * @generated
    */
   EClass getRoleNode();
+
+  /**
+   * Returns the meta object for the attribute '{@link de.larsschuetze.storyboard.dsl.RoleNode#getCompartmentName <em>Compartment Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Compartment Name</em>'.
+   * @see de.larsschuetze.storyboard.dsl.RoleNode#getCompartmentName()
+   * @see #getRoleNode()
+   * @generated
+   */
+  EAttribute getRoleNode_CompartmentName();
 
   /**
    * Returns the meta object for the attribute '{@link de.larsschuetze.storyboard.dsl.RoleNode#getName <em>Name</em>}'.
@@ -973,6 +1148,14 @@ public interface DslPackage extends EPackage
     EClass ABSTRACT_ELEMENT = eINSTANCE.getAbstractElement();
 
     /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ABSTRACT_ELEMENT__NAME = eINSTANCE.getAbstractElement_Name();
+
+    /**
      * The meta object literal for the '{@link de.larsschuetze.storyboard.dsl.impl.NodeImpl <em>Node</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1003,12 +1186,14 @@ public interface DslPackage extends EPackage
     EClass START_NODE = eINSTANCE.getStartNode();
 
     /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * The meta object literal for the '{@link de.larsschuetze.storyboard.dsl.impl.EndNodeImpl <em>End Node</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     * @see de.larsschuetze.storyboard.dsl.impl.EndNodeImpl
+     * @see de.larsschuetze.storyboard.dsl.impl.DslPackageImpl#getEndNode()
      * @generated
      */
-    EAttribute START_NODE__NAME = eINSTANCE.getStartNode_Name();
+    EClass END_NODE = eINSTANCE.getEndNode();
 
     /**
      * The meta object literal for the '{@link de.larsschuetze.storyboard.dsl.impl.EventImpl <em>Event</em>}' class.
@@ -1047,12 +1232,20 @@ public interface DslPackage extends EPackage
     EClass TRANSITION = eINSTANCE.getTransition();
 
     /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Event</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute TRANSITION__NAME = eINSTANCE.getTransition_Name();
+    EReference TRANSITION__EVENT = eINSTANCE.getTransition_Event();
+
+    /**
+     * The meta object literal for the '<em><b>Guard</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference TRANSITION__GUARD = eINSTANCE.getTransition_Guard();
 
     /**
      * The meta object literal for the '<em><b>Source</b></em>' reference feature.
@@ -1079,20 +1272,22 @@ public interface DslPackage extends EPackage
     EReference TRANSITION__TARGET = eINSTANCE.getTransition_Target();
 
     /**
-     * The meta object literal for the '<em><b>Event</b></em>' reference feature.
+     * The meta object literal for the '{@link de.larsschuetze.storyboard.dsl.impl.GuardImpl <em>Guard</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     * @see de.larsschuetze.storyboard.dsl.impl.GuardImpl
+     * @see de.larsschuetze.storyboard.dsl.impl.DslPackageImpl#getGuard()
      * @generated
      */
-    EReference TRANSITION__EVENT = eINSTANCE.getTransition_Event();
+    EClass GUARD = eINSTANCE.getGuard();
 
     /**
-     * The meta object literal for the '<em><b>Guard</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Guard</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference TRANSITION__GUARD = eINSTANCE.getTransition_Guard();
+    EAttribute GUARD__GUARD = eINSTANCE.getGuard_Guard();
 
     /**
      * The meta object literal for the '{@link de.larsschuetze.storyboard.dsl.impl.StoryPatternNodeImpl <em>Story Pattern Node</em>}' class.
@@ -1103,14 +1298,6 @@ public interface DslPackage extends EPackage
      * @generated
      */
     EClass STORY_PATTERN_NODE = eINSTANCE.getStoryPatternNode();
-
-    /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute STORY_PATTERN_NODE__NAME = eINSTANCE.getStoryPatternNode_Name();
 
     /**
      * The meta object literal for the '<em><b>Class Name</b></em>' attribute feature.
@@ -1137,6 +1324,14 @@ public interface DslPackage extends EPackage
      * @generated
      */
     EClass ROLE_NODE = eINSTANCE.getRoleNode();
+
+    /**
+     * The meta object literal for the '<em><b>Compartment Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ROLE_NODE__COMPARTMENT_NAME = eINSTANCE.getRoleNode_CompartmentName();
 
     /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.

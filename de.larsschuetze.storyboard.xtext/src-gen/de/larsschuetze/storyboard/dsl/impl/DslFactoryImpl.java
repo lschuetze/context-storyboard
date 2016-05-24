@@ -70,8 +70,10 @@ public class DslFactoryImpl extends EFactoryImpl implements DslFactory
       case DslPackage.NODE: return createNode();
       case DslPackage.CONTROL_NODE: return createControlNode();
       case DslPackage.START_NODE: return createStartNode();
+      case DslPackage.END_NODE: return createEndNode();
       case DslPackage.EVENT: return createEvent();
       case DslPackage.TRANSITION: return createTransition();
+      case DslPackage.GUARD: return createGuard();
       case DslPackage.STORY_PATTERN_NODE: return createStoryPatternNode();
       case DslPackage.ROLE_NODE: return createRoleNode();
       case DslPackage.REWRITE_ROLE_NODE: return createRewriteRoleNode();
@@ -146,6 +148,17 @@ public class DslFactoryImpl extends EFactoryImpl implements DslFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  public EndNode createEndNode()
+  {
+    EndNodeImpl endNode = new EndNodeImpl();
+    return endNode;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public Event createEvent()
   {
     EventImpl event = new EventImpl();
@@ -161,6 +174,17 @@ public class DslFactoryImpl extends EFactoryImpl implements DslFactory
   {
     TransitionImpl transition = new TransitionImpl();
     return transition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Guard createGuard()
+  {
+    GuardImpl guard = new GuardImpl();
+    return guard;
   }
 
   /**

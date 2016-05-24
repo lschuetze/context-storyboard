@@ -7,7 +7,7 @@ Storyboard:
 	'events' '{'
 		importedEvents += Event+
 	'}'
-	'storyboard' name = ValidID
+	'storyboard' name = QualifiedName
 	elements += AbstractElement*
 ;
 
@@ -20,11 +20,15 @@ Node:
 ;
 
 ControlNode:
-	StartNode
+	StartNode | EndNode
 ;
 
 StartNode:
 	'start' name = ValidID
+;
+
+EndNode:
+	'end' name = ValidID
 ;
 
 Event:
@@ -33,12 +37,17 @@ Event:
 
 Transition:
 	'transition' name = ValidID '{'
-		//check if source & target are storypatterns later
-		'source' source = [Node]('.'sourcePort = StoryPatternPort)?
-		'target' target = [Node]
-		'on' event = [Event]
-		('when' guard = XClosure)?
+		'{' event = [Event] guard = Guard? '}'
+		source = [Node]('.'sourcePort = StoryPatternPort)? '->' target = [Node]
 	'}'
+;
+
+Guard:
+	'[' guard = GuardValue ']'
+;
+
+GuardValue:
+	(ID | STRING | INT | '(' | ')' | '.' | OpCompare | OpEquality)+
 ;
 
 StoryPatternPort:
@@ -54,7 +63,7 @@ SuccessPort:
 ;
 
 StoryPatternNode:
-	'storypattern' name = ValidID
+	'storypattern' name = QualifiedName
 	'{'
 		'class' className = QualifiedName '{'
 			(roleReconfigurations += RoleNode)+
@@ -63,7 +72,7 @@ StoryPatternNode:
 ;
 
 RoleNode:
-	ConditionRoleNode | RewriteRoleNode
+	(ConditionRoleNode | RewriteRoleNode) 'in' compartmentName = QualifiedName
 ;
 
 RewriteRoleNode:

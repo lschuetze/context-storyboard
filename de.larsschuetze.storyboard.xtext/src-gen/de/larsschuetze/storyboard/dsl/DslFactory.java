@@ -69,6 +69,15 @@ public interface DslFactory extends EFactory
   StartNode createStartNode();
 
   /**
+   * Returns a new object of class '<em>End Node</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>End Node</em>'.
+   * @generated
+   */
+  EndNode createEndNode();
+
+  /**
    * Returns a new object of class '<em>Event</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -85,6 +94,15 @@ public interface DslFactory extends EFactory
    * @generated
    */
   Transition createTransition();
+
+  /**
+   * Returns a new object of class '<em>Guard</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Guard</em>'.
+   * @generated
+   */
+  Guard createGuard();
 
   /**
    * Returns a new object of class '<em>Story Pattern Node</em>'.

@@ -34,7 +34,7 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		private final Keyword cStoryboardKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		private final Assignment cNameAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cNameValidIDParserRuleCall_5_0 = (RuleCall)cNameAssignment_5.eContents().get(0);
+		private final RuleCall cNameQualifiedNameParserRuleCall_5_0 = (RuleCall)cNameAssignment_5.eContents().get(0);
 		private final Assignment cElementsAssignment_6 = (Assignment)cGroup.eContents().get(6);
 		private final RuleCall cElementsAbstractElementParserRuleCall_6_0 = (RuleCall)cElementsAssignment_6.eContents().get(0);
 		
@@ -42,11 +42,11 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		//	'events' '{'
 		//	importedEvents+=Event+
 		//	'}'
-		//	'storyboard' name=ValidID
+		//	'storyboard' name=QualifiedName
 		//	elements+=AbstractElement*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'events' '{' importedEvents+=Event+ '}' 'storyboard' name=ValidID elements+=AbstractElement*
+		//'events' '{' importedEvents+=Event+ '}' 'storyboard' name=QualifiedName elements+=AbstractElement*
 		public Group getGroup() { return cGroup; }
 		
 		//'events'
@@ -67,11 +67,11 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		//'storyboard'
 		public Keyword getStoryboardKeyword_4() { return cStoryboardKeyword_4; }
 		
-		//name=ValidID
+		//name=QualifiedName
 		public Assignment getNameAssignment_5() { return cNameAssignment_5; }
 		
-		//ValidID
-		public RuleCall getNameValidIDParserRuleCall_5_0() { return cNameValidIDParserRuleCall_5_0; }
+		//QualifiedName
+		public RuleCall getNameQualifiedNameParserRuleCall_5_0() { return cNameQualifiedNameParserRuleCall_5_0; }
 		
 		//elements+=AbstractElement*
 		public Assignment getElementsAssignment_6() { return cElementsAssignment_6; }
@@ -119,14 +119,22 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	public class ControlNodeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.larsschuetze.storyboard.Dsl.ControlNode");
-		private final RuleCall cStartNodeParserRuleCall = (RuleCall)rule.eContents().get(1);
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cStartNodeParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cEndNodeParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//ControlNode:
-		//	StartNode;
+		//	StartNode | EndNode;
 		@Override public ParserRule getRule() { return rule; }
 		
+		//StartNode | EndNode
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
 		//StartNode
-		public RuleCall getStartNodeParserRuleCall() { return cStartNodeParserRuleCall; }
+		public RuleCall getStartNodeParserRuleCall_0() { return cStartNodeParserRuleCall_0; }
+		
+		//EndNode
+		public RuleCall getEndNodeParserRuleCall_1() { return cEndNodeParserRuleCall_1; }
 	}
 	public class StartNodeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.larsschuetze.storyboard.Dsl.StartNode");
@@ -144,6 +152,29 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//'start'
 		public Keyword getStartKeyword_0() { return cStartKeyword_0; }
+		
+		//name=ValidID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		
+		//ValidID
+		public RuleCall getNameValidIDParserRuleCall_1_0() { return cNameValidIDParserRuleCall_1_0; }
+	}
+	public class EndNodeElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.larsschuetze.storyboard.Dsl.EndNode");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cEndKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameValidIDParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		
+		//EndNode:
+		//	'end' name=ValidID;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'end' name=ValidID
+		public Group getGroup() { return cGroup; }
+		
+		//'end'
+		public Keyword getEndKeyword_0() { return cEndKeyword_0; }
 		
 		//name=ValidID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
@@ -193,40 +224,35 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameValidIDParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Keyword cSourceKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Assignment cSourceAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final CrossReference cSourceNodeCrossReference_4_0 = (CrossReference)cSourceAssignment_4.eContents().get(0);
-		private final RuleCall cSourceNodeIDTerminalRuleCall_4_0_1 = (RuleCall)cSourceNodeCrossReference_4_0.eContents().get(1);
-		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
-		private final Keyword cFullStopKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
-		private final Assignment cSourcePortAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
-		private final RuleCall cSourcePortStoryPatternPortParserRuleCall_5_1_0 = (RuleCall)cSourcePortAssignment_5_1.eContents().get(0);
-		private final Keyword cTargetKeyword_6 = (Keyword)cGroup.eContents().get(6);
-		private final Assignment cTargetAssignment_7 = (Assignment)cGroup.eContents().get(7);
-		private final CrossReference cTargetNodeCrossReference_7_0 = (CrossReference)cTargetAssignment_7.eContents().get(0);
-		private final RuleCall cTargetNodeIDTerminalRuleCall_7_0_1 = (RuleCall)cTargetNodeCrossReference_7_0.eContents().get(1);
-		private final Keyword cOnKeyword_8 = (Keyword)cGroup.eContents().get(8);
-		private final Assignment cEventAssignment_9 = (Assignment)cGroup.eContents().get(9);
-		private final CrossReference cEventEventCrossReference_9_0 = (CrossReference)cEventAssignment_9.eContents().get(0);
-		private final RuleCall cEventEventIDTerminalRuleCall_9_0_1 = (RuleCall)cEventEventCrossReference_9_0.eContents().get(1);
-		private final Group cGroup_10 = (Group)cGroup.eContents().get(10);
-		private final Keyword cWhenKeyword_10_0 = (Keyword)cGroup_10.eContents().get(0);
-		private final Assignment cGuardAssignment_10_1 = (Assignment)cGroup_10.eContents().get(1);
-		private final RuleCall cGuardXClosureParserRuleCall_10_1_0 = (RuleCall)cGuardAssignment_10_1.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cEventAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final CrossReference cEventEventCrossReference_4_0 = (CrossReference)cEventAssignment_4.eContents().get(0);
+		private final RuleCall cEventEventIDTerminalRuleCall_4_0_1 = (RuleCall)cEventEventCrossReference_4_0.eContents().get(1);
+		private final Assignment cGuardAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cGuardGuardParserRuleCall_5_0 = (RuleCall)cGuardAssignment_5.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Assignment cSourceAssignment_7 = (Assignment)cGroup.eContents().get(7);
+		private final CrossReference cSourceNodeCrossReference_7_0 = (CrossReference)cSourceAssignment_7.eContents().get(0);
+		private final RuleCall cSourceNodeIDTerminalRuleCall_7_0_1 = (RuleCall)cSourceNodeCrossReference_7_0.eContents().get(1);
+		private final Group cGroup_8 = (Group)cGroup.eContents().get(8);
+		private final Keyword cFullStopKeyword_8_0 = (Keyword)cGroup_8.eContents().get(0);
+		private final Assignment cSourcePortAssignment_8_1 = (Assignment)cGroup_8.eContents().get(1);
+		private final RuleCall cSourcePortStoryPatternPortParserRuleCall_8_1_0 = (RuleCall)cSourcePortAssignment_8_1.eContents().get(0);
+		private final Keyword cHyphenMinusGreaterThanSignKeyword_9 = (Keyword)cGroup.eContents().get(9);
+		private final Assignment cTargetAssignment_10 = (Assignment)cGroup.eContents().get(10);
+		private final CrossReference cTargetNodeCrossReference_10_0 = (CrossReference)cTargetAssignment_10.eContents().get(0);
+		private final RuleCall cTargetNodeIDTerminalRuleCall_10_0_1 = (RuleCall)cTargetNodeCrossReference_10_0.eContents().get(1);
 		private final Keyword cRightCurlyBracketKeyword_11 = (Keyword)cGroup.eContents().get(11);
 		
 		//Transition:
 		//	'transition' name=ValidID '{'
-		//	//check if source & target are storypatterns later
-		//	'source' source=[Node] ('.' sourcePort=StoryPatternPort)?
-		//	'target' target=[Node]
-		//	'on' event=[Event] ('when' guard=XClosure)?
+		//	'{' event=[Event] guard=Guard? '}'
+		//	source=[Node] ('.' sourcePort=StoryPatternPort)? '->' target=[Node]
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'transition' name=ValidID '{' //check if source & target are storypatterns later
-		//'source' source=[Node] ('.' sourcePort=StoryPatternPort)? 'target' target=[Node] 'on' event=[Event] ('when'
-		//guard=XClosure)? '}'
+		//'transition' name=ValidID '{' '{' event=[Event] guard=Guard? '}' source=[Node] ('.' sourcePort=StoryPatternPort)? '->'
+		//target=[Node] '}'
 		public Group getGroup() { return cGroup; }
 		
 		//'transition'
@@ -241,69 +267,132 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 		
-		////check if source & target are storypatterns later
-		//'source'
-		public Keyword getSourceKeyword_3() { return cSourceKeyword_3; }
-		
-		//source=[Node]
-		public Assignment getSourceAssignment_4() { return cSourceAssignment_4; }
-		
-		//[Node]
-		public CrossReference getSourceNodeCrossReference_4_0() { return cSourceNodeCrossReference_4_0; }
-		
-		//ID
-		public RuleCall getSourceNodeIDTerminalRuleCall_4_0_1() { return cSourceNodeIDTerminalRuleCall_4_0_1; }
-		
-		//('.' sourcePort=StoryPatternPort)?
-		public Group getGroup_5() { return cGroup_5; }
-		
-		//'.'
-		public Keyword getFullStopKeyword_5_0() { return cFullStopKeyword_5_0; }
-		
-		//sourcePort=StoryPatternPort
-		public Assignment getSourcePortAssignment_5_1() { return cSourcePortAssignment_5_1; }
-		
-		//StoryPatternPort
-		public RuleCall getSourcePortStoryPatternPortParserRuleCall_5_1_0() { return cSourcePortStoryPatternPortParserRuleCall_5_1_0; }
-		
-		//'target'
-		public Keyword getTargetKeyword_6() { return cTargetKeyword_6; }
-		
-		//target=[Node]
-		public Assignment getTargetAssignment_7() { return cTargetAssignment_7; }
-		
-		//[Node]
-		public CrossReference getTargetNodeCrossReference_7_0() { return cTargetNodeCrossReference_7_0; }
-		
-		//ID
-		public RuleCall getTargetNodeIDTerminalRuleCall_7_0_1() { return cTargetNodeIDTerminalRuleCall_7_0_1; }
-		
-		//'on'
-		public Keyword getOnKeyword_8() { return cOnKeyword_8; }
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 		
 		//event=[Event]
-		public Assignment getEventAssignment_9() { return cEventAssignment_9; }
+		public Assignment getEventAssignment_4() { return cEventAssignment_4; }
 		
 		//[Event]
-		public CrossReference getEventEventCrossReference_9_0() { return cEventEventCrossReference_9_0; }
+		public CrossReference getEventEventCrossReference_4_0() { return cEventEventCrossReference_4_0; }
 		
 		//ID
-		public RuleCall getEventEventIDTerminalRuleCall_9_0_1() { return cEventEventIDTerminalRuleCall_9_0_1; }
+		public RuleCall getEventEventIDTerminalRuleCall_4_0_1() { return cEventEventIDTerminalRuleCall_4_0_1; }
 		
-		//('when' guard=XClosure)?
-		public Group getGroup_10() { return cGroup_10; }
+		//guard=Guard?
+		public Assignment getGuardAssignment_5() { return cGuardAssignment_5; }
 		
-		//'when'
-		public Keyword getWhenKeyword_10_0() { return cWhenKeyword_10_0; }
+		//Guard
+		public RuleCall getGuardGuardParserRuleCall_5_0() { return cGuardGuardParserRuleCall_5_0; }
 		
-		//guard=XClosure
-		public Assignment getGuardAssignment_10_1() { return cGuardAssignment_10_1; }
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
 		
-		//XClosure
-		public RuleCall getGuardXClosureParserRuleCall_10_1_0() { return cGuardXClosureParserRuleCall_10_1_0; }
+		//source=[Node]
+		public Assignment getSourceAssignment_7() { return cSourceAssignment_7; }
+		
+		//[Node]
+		public CrossReference getSourceNodeCrossReference_7_0() { return cSourceNodeCrossReference_7_0; }
+		
+		//ID
+		public RuleCall getSourceNodeIDTerminalRuleCall_7_0_1() { return cSourceNodeIDTerminalRuleCall_7_0_1; }
+		
+		//('.' sourcePort=StoryPatternPort)?
+		public Group getGroup_8() { return cGroup_8; }
+		
+		//'.'
+		public Keyword getFullStopKeyword_8_0() { return cFullStopKeyword_8_0; }
+		
+		//sourcePort=StoryPatternPort
+		public Assignment getSourcePortAssignment_8_1() { return cSourcePortAssignment_8_1; }
+		
+		//StoryPatternPort
+		public RuleCall getSourcePortStoryPatternPortParserRuleCall_8_1_0() { return cSourcePortStoryPatternPortParserRuleCall_8_1_0; }
+		
+		//'->'
+		public Keyword getHyphenMinusGreaterThanSignKeyword_9() { return cHyphenMinusGreaterThanSignKeyword_9; }
+		
+		//target=[Node]
+		public Assignment getTargetAssignment_10() { return cTargetAssignment_10; }
+		
+		//[Node]
+		public CrossReference getTargetNodeCrossReference_10_0() { return cTargetNodeCrossReference_10_0; }
+		
+		//ID
+		public RuleCall getTargetNodeIDTerminalRuleCall_10_0_1() { return cTargetNodeIDTerminalRuleCall_10_0_1; }
 		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_11() { return cRightCurlyBracketKeyword_11; }
+	}
+	public class GuardElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.larsschuetze.storyboard.Dsl.Guard");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cLeftSquareBracketKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cGuardAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cGuardGuardValueParserRuleCall_1_0 = (RuleCall)cGuardAssignment_1.eContents().get(0);
+		private final Keyword cRightSquareBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		
+		//Guard:
+		//	'[' guard=GuardValue ']';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'[' guard=GuardValue ']'
+		public Group getGroup() { return cGroup; }
+		
+		//'['
+		public Keyword getLeftSquareBracketKeyword_0() { return cLeftSquareBracketKeyword_0; }
+		
+		//guard=GuardValue
+		public Assignment getGuardAssignment_1() { return cGuardAssignment_1; }
+		
+		//GuardValue
+		public RuleCall getGuardGuardValueParserRuleCall_1_0() { return cGuardGuardValueParserRuleCall_1_0; }
+		
+		//']'
+		public Keyword getRightSquareBracketKeyword_2() { return cRightSquareBracketKeyword_2; }
+	}
+	public class GuardValueElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.larsschuetze.storyboard.Dsl.GuardValue");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cIDTerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cSTRINGTerminalRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cINTTerminalRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final Keyword cLeftParenthesisKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
+		private final Keyword cRightParenthesisKeyword_4 = (Keyword)cAlternatives.eContents().get(4);
+		private final Keyword cFullStopKeyword_5 = (Keyword)cAlternatives.eContents().get(5);
+		private final RuleCall cOpCompareParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
+		private final RuleCall cOpEqualityParserRuleCall_7 = (RuleCall)cAlternatives.eContents().get(7);
+		
+		//GuardValue:
+		//	(ID | STRING | INT | '(' | ')' | '.' | OpCompare | OpEquality)+;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//(ID | STRING | INT | '(' | ')' | '.' | OpCompare | OpEquality)+
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//ID
+		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
+		
+		//STRING
+		public RuleCall getSTRINGTerminalRuleCall_1() { return cSTRINGTerminalRuleCall_1; }
+		
+		//INT
+		public RuleCall getINTTerminalRuleCall_2() { return cINTTerminalRuleCall_2; }
+		
+		//'('
+		public Keyword getLeftParenthesisKeyword_3() { return cLeftParenthesisKeyword_3; }
+		
+		//')'
+		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
+		
+		//'.'
+		public Keyword getFullStopKeyword_5() { return cFullStopKeyword_5; }
+		
+		//OpCompare
+		public RuleCall getOpCompareParserRuleCall_6() { return cOpCompareParserRuleCall_6; }
+		
+		//OpEquality
+		public RuleCall getOpEqualityParserRuleCall_7() { return cOpEqualityParserRuleCall_7; }
 	}
 	public class StoryPatternPortElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.larsschuetze.storyboard.Dsl.StoryPatternPort");
@@ -351,7 +440,7 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cStorypatternKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameValidIDParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final RuleCall cNameQualifiedNameParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Keyword cClassKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		private final Assignment cClassNameAssignment_4 = (Assignment)cGroup.eContents().get(4);
@@ -363,7 +452,7 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_8 = (Keyword)cGroup.eContents().get(8);
 		
 		//StoryPatternNode:
-		//	'storypattern' name=ValidID
+		//	'storypattern' name=QualifiedName
 		//	'{'
 		//	'class' className=QualifiedName '{'
 		//	roleReconfigurations+=RoleNode+
@@ -371,17 +460,17 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'storypattern' name=ValidID '{' 'class' className=QualifiedName '{' roleReconfigurations+=RoleNode+ '}' '}'
+		//'storypattern' name=QualifiedName '{' 'class' className=QualifiedName '{' roleReconfigurations+=RoleNode+ '}' '}'
 		public Group getGroup() { return cGroup; }
 		
 		//'storypattern'
 		public Keyword getStorypatternKeyword_0() { return cStorypatternKeyword_0; }
 		
-		//name=ValidID
+		//name=QualifiedName
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 		
-		//ValidID
-		public RuleCall getNameValidIDParserRuleCall_1_0() { return cNameValidIDParserRuleCall_1_0; }
+		//QualifiedName
+		public RuleCall getNameQualifiedNameParserRuleCall_1_0() { return cNameQualifiedNameParserRuleCall_1_0; }
 		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
@@ -412,22 +501,38 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	public class RoleNodeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.larsschuetze.storyboard.Dsl.RoleNode");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cConditionRoleNodeParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cRewriteRoleNodeParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
+		private final RuleCall cConditionRoleNodeParserRuleCall_0_0 = (RuleCall)cAlternatives_0.eContents().get(0);
+		private final RuleCall cRewriteRoleNodeParserRuleCall_0_1 = (RuleCall)cAlternatives_0.eContents().get(1);
+		private final Keyword cInKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cCompartmentNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cCompartmentNameQualifiedNameParserRuleCall_2_0 = (RuleCall)cCompartmentNameAssignment_2.eContents().get(0);
 		
 		//RoleNode:
-		//	ConditionRoleNode | RewriteRoleNode;
+		//	(ConditionRoleNode | RewriteRoleNode) 'in' compartmentName=QualifiedName;
 		@Override public ParserRule getRule() { return rule; }
 		
+		//(ConditionRoleNode | RewriteRoleNode) 'in' compartmentName=QualifiedName
+		public Group getGroup() { return cGroup; }
+		
 		//ConditionRoleNode | RewriteRoleNode
-		public Alternatives getAlternatives() { return cAlternatives; }
+		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 		
 		//ConditionRoleNode
-		public RuleCall getConditionRoleNodeParserRuleCall_0() { return cConditionRoleNodeParserRuleCall_0; }
+		public RuleCall getConditionRoleNodeParserRuleCall_0_0() { return cConditionRoleNodeParserRuleCall_0_0; }
 		
 		//RewriteRoleNode
-		public RuleCall getRewriteRoleNodeParserRuleCall_1() { return cRewriteRoleNodeParserRuleCall_1; }
+		public RuleCall getRewriteRoleNodeParserRuleCall_0_1() { return cRewriteRoleNodeParserRuleCall_0_1; }
+		
+		//'in'
+		public Keyword getInKeyword_1() { return cInKeyword_1; }
+		
+		//compartmentName=QualifiedName
+		public Assignment getCompartmentNameAssignment_2() { return cCompartmentNameAssignment_2; }
+		
+		//QualifiedName
+		public RuleCall getCompartmentNameQualifiedNameParserRuleCall_2_0() { return cCompartmentNameQualifiedNameParserRuleCall_2_0; }
 	}
 	public class RewriteRoleNodeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.larsschuetze.storyboard.Dsl.RewriteRoleNode");
@@ -593,8 +698,11 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 	private final NodeElements pNode;
 	private final ControlNodeElements pControlNode;
 	private final StartNodeElements pStartNode;
+	private final EndNodeElements pEndNode;
 	private final EventElements pEvent;
 	private final TransitionElements pTransition;
+	private final GuardElements pGuard;
+	private final GuardValueElements pGuardValue;
 	private final StoryPatternPortElements pStoryPatternPort;
 	private final FailurePortElements pFailurePort;
 	private final SuccessPortElements pSuccessPort;
@@ -626,8 +734,11 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		this.pNode = new NodeElements();
 		this.pControlNode = new ControlNodeElements();
 		this.pStartNode = new StartNodeElements();
+		this.pEndNode = new EndNodeElements();
 		this.pEvent = new EventElements();
 		this.pTransition = new TransitionElements();
+		this.pGuard = new GuardElements();
+		this.pGuardValue = new GuardValueElements();
 		this.pStoryPatternPort = new StoryPatternPortElements();
 		this.pFailurePort = new FailurePortElements();
 		this.pSuccessPort = new SuccessPortElements();
@@ -677,7 +788,7 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 	//	'events' '{'
 	//	importedEvents+=Event+
 	//	'}'
-	//	'storyboard' name=ValidID
+	//	'storyboard' name=QualifiedName
 	//	elements+=AbstractElement*;
 	public StoryboardElements getStoryboardAccess() {
 		return pStoryboard;
@@ -708,7 +819,7 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//ControlNode:
-	//	StartNode;
+	//	StartNode | EndNode;
 	public ControlNodeElements getControlNodeAccess() {
 		return pControlNode;
 	}
@@ -727,6 +838,16 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		return getStartNodeAccess().getRule();
 	}
 	
+	//EndNode:
+	//	'end' name=ValidID;
+	public EndNodeElements getEndNodeAccess() {
+		return pEndNode;
+	}
+	
+	public ParserRule getEndNodeRule() {
+		return getEndNodeAccess().getRule();
+	}
+	
 	//Event:
 	//	'import' eventType=JvmTypeReference 'as' name=ValidID;
 	public EventElements getEventAccess() {
@@ -739,10 +860,8 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 	
 	//Transition:
 	//	'transition' name=ValidID '{'
-	//	//check if source & target are storypatterns later
-	//	'source' source=[Node] ('.' sourcePort=StoryPatternPort)?
-	//	'target' target=[Node]
-	//	'on' event=[Event] ('when' guard=XClosure)?
+	//	'{' event=[Event] guard=Guard? '}'
+	//	source=[Node] ('.' sourcePort=StoryPatternPort)? '->' target=[Node]
 	//	'}';
 	public TransitionElements getTransitionAccess() {
 		return pTransition;
@@ -750,6 +869,26 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getTransitionRule() {
 		return getTransitionAccess().getRule();
+	}
+	
+	//Guard:
+	//	'[' guard=GuardValue ']';
+	public GuardElements getGuardAccess() {
+		return pGuard;
+	}
+	
+	public ParserRule getGuardRule() {
+		return getGuardAccess().getRule();
+	}
+	
+	//GuardValue:
+	//	(ID | STRING | INT | '(' | ')' | '.' | OpCompare | OpEquality)+;
+	public GuardValueElements getGuardValueAccess() {
+		return pGuardValue;
+	}
+	
+	public ParserRule getGuardValueRule() {
+		return getGuardValueAccess().getRule();
 	}
 	
 	//StoryPatternPort:
@@ -783,7 +922,7 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//StoryPatternNode:
-	//	'storypattern' name=ValidID
+	//	'storypattern' name=QualifiedName
 	//	'{'
 	//	'class' className=QualifiedName '{'
 	//	roleReconfigurations+=RoleNode+
@@ -798,7 +937,7 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//RoleNode:
-	//	ConditionRoleNode | RewriteRoleNode;
+	//	(ConditionRoleNode | RewriteRoleNode) 'in' compartmentName=QualifiedName;
 	public RoleNodeElements getRoleNodeAccess() {
 		return pRoleNode;
 	}

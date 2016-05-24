@@ -101,6 +101,11 @@ public class DslAdapterFactory extends AdapterFactoryImpl
         return createStartNodeAdapter();
       }
       @Override
+      public Adapter caseEndNode(EndNode object)
+      {
+        return createEndNodeAdapter();
+      }
+      @Override
       public Adapter caseEvent(Event object)
       {
         return createEventAdapter();
@@ -109,6 +114,11 @@ public class DslAdapterFactory extends AdapterFactoryImpl
       public Adapter caseTransition(Transition object)
       {
         return createTransitionAdapter();
+      }
+      @Override
+      public Adapter caseGuard(Guard object)
+      {
+        return createGuardAdapter();
       }
       @Override
       public Adapter caseStoryPatternNode(StoryPatternNode object)
@@ -253,6 +263,21 @@ public class DslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link de.larsschuetze.storyboard.dsl.EndNode <em>End Node</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.larsschuetze.storyboard.dsl.EndNode
+   * @generated
+   */
+  public Adapter createEndNodeAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link de.larsschuetze.storyboard.dsl.Event <em>Event</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -278,6 +303,21 @@ public class DslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createTransitionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link de.larsschuetze.storyboard.dsl.Guard <em>Guard</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.larsschuetze.storyboard.dsl.Guard
+   * @generated
+   */
+  public Adapter createGuardAdapter()
   {
     return null;
   }
