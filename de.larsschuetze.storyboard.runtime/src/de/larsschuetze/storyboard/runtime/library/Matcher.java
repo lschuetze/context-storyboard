@@ -18,17 +18,27 @@ public abstract class Matcher {
 	protected Map<String, List<String>> requiredRoles;
 	protected Map<String, List<String>> prohibitedRoles;
 	protected IQueryModelInstance query;
+	protected String className;
 
 	public Matcher() {
 		requiredRoles = new HashMap<>();
 		prohibitedRoles = new HashMap<>();
 	}
-	
+
 	public void setQuery(IQueryModelInstance query) {
 		this.query = query;
 	}
 
-	public abstract boolean execute();
+	public boolean execute() {
+		Set<Player> candidates = getCandidates(className);
+		Set<Player> matchingPlayers = getMatchingPlayers(candidates);
+		if (matchingPlayers.isEmpty()) {
+			return false;
+		} else {
+			setMatchResult(matchingPlayers.iterator().next());
+			return true;
+		}
+	}
 
 	protected void setMatchResult(Player matchResult) {
 		this.matchResult = matchResult;

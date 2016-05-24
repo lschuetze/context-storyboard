@@ -23,9 +23,9 @@ public class MatchActivity extends Activity {
 	}
 
 	private void adapt() {
-		adapter.adapt(matcher.getMatchResult(),
-				runtime.getModelInstanceAdapter(),
-				runtime.getModelInstanceQuery());
+		adapter.setAdaption(runtime.getModelInstanceAdapter());
+		adapter.setQuery(runtime.getModelInstanceQuery());
+		adapter.adapt(matcher.getMatchResult());
 	}
 
 	@Override
