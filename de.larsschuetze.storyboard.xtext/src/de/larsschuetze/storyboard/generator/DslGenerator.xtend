@@ -124,7 +124,7 @@ class DslGenerator implements IGenerator {
 	def instantiate(Transition it) '''
 		Transition «name» = new Transition(«source.fullyQualifiedName.getSegment(
 			source.fullyQualifiedName.segmentCount-1)»«IF sourcePort != null»
-														«IF sourcePort == "success"».getSuccessNode()«ELSE».getFailNode()«ENDIF»
+																«IF sourcePort == "success"».getSuccessNode()«ELSE».getFailNode()«ENDIF»
 		«ENDIF»,
 			«target.fullyQualifiedName.getSegment(target.fullyQualifiedName.segmentCount-1)», "«name»");
 			«name».setTriggerEventType("«event.eventType.type.qualifiedName»");
@@ -145,18 +145,18 @@ class DslGenerator implements IGenerator {
 			@Override
 			public void adapt(Player adaptee,
 						IAdaptModelInstance adaption, IQueryModelInstance query) {
-				«FOR r : it.roleReconfigurations»
-					«IF r instanceof AddRoleNode»
-						putAdaptionAction("add", "«r.compartmentName»", "«r.name»");
-					«ENDIF»
-					«IF r instanceof RemoveRoleNode»
-						putAdaptionAction("remove", "«r.compartmentName»", "«r.name»");
-					«ENDIF»
-					«IF r instanceof RenewRoleNode»
-						putAdaptionAction("remove", "«r.compartmentName»", "«r.name»");
-						putAdaptionAction("add", "«r.compartmentName»", "«r.name»");
-					«ENDIF»
-				«ENDFOR»				
+		«««				«FOR r : it.roleReconfigurations»
+«««					«IF r instanceof AddRoleNode»
+«««						putAdaptionAction("add", "«r.compartmentName»", "«r.name»");
+«««					«ENDIF»
+«««					«IF r instanceof RemoveRoleNode»
+«««						putAdaptionAction("remove", "«r.compartmentName»", "«r.name»");
+«««					«ENDIF»
+«««					«IF r instanceof RenewRoleNode»
+«««						putAdaptionAction("remove", "«r.compartmentName»", "«r.name»");
+«««						putAdaptionAction("add", "«r.compartmentName»", "«r.name»");
+«««					«ENDIF»
+«««				«ENDFOR»				
 			}
 		}
 	'''
@@ -168,61 +168,31 @@ class DslGenerator implements IGenerator {
 		
 		import de.larsschuetze.storyboard.runtime.library.Matcher;
 		import de.larsschuetze.storyboard.manager.roles.IQueryModelInstance;
-		import de.larsschuetze.storyboard.model.crom.crom_l0.Player;
-		import de.larsschuetze.storyboard.model.crom.crom_l0.Role;
+		import de.larsschuetze.storyboard.model.crom.crom_l0.*;
 		
-		public class «name»Matcher extends Matcher {			
-			@Override
-			public boolean execute(IQueryModelInstance query) {
-				Map<String, String> matchingRoles = new HashMap<>();
-				Map<String, String> prohibitedRoles = new HashMap<>();
-				«FOR r : it.roleReconfigurations»
-					«IF !(r instanceof AddRoleNode) »
-						«IF (r instanceof ProhibitedRoleNode)»
-							prohibitedRoles.put("«r.name»", "«r.compartmentName»");
-						«ELSE»
-							matchingRoles.put("«r.name»", "«r.compartmentName»");
-						«ENDIF»
+		public class «name»Matcher extends Matcher {
+			
+			public «name»Matcher() {
+				super();
+				«FOR r : roleReconfigurations»
+					«IF r instanceof ProhibitedRoleNode || r instanceof AddRoleNode»
+						putProhibition("«r.compartmentName»", "«r.name»");
+					«ELSE»
+						putRequirement("«r.compartmentName»", "«r.name»");
 					«ENDIF»
-				«ENDFOR»
-				
-				for(Player p : query.getPlayers("«it.className»")) {
-					boolean errorMatch = false;
-					for(String roleName : matchingRoles.keySet()) {
-						if(getRoleCompMap(query, p).containsKey(roleName)) {
-							if(getRoleCompMap(query, p).get(roleName) == matchingRoles.get(roleName)) {
-								List<Role> roles = rolesOfPlayer.get(
-							} else {
-							errorMatch |= true;	
-							}								
-						} else {
-							errorMatch |= true;
-						}
-					}
-					
-					for(String roleName : prohibitedRoles.keySet()) {
-						if(getRoleCompMap(query, p).containsKey(roleName)) {
-							if(getRoleCompMap(query, p).get(roleName) == prohibitedRoles.get(roleName)) {
-								errorMatch |= true;
-							}
-						}								
-					}
-					
-					if(!errorMatch) {
-						setMatchResult(p);
-						return true;
-					}
-				}
-				return false;
+				«ENDFOR»				
 			}
-		
-			private Map<String, String> getRoleCompMap(IQueryModelInstance query, Player p) {
-				List<Role> roles = query.getRoleByPlayer(p);
-				Map<String, String> result = new HashMap<>();
-				for(Role r : roles) {
-					result.put(r.getRoleType(), query.getCompartment(r).getCompartmentType());
+						
+			@Override
+			public boolean execute() {
+				Set<Player> candidates = getCandidates("«className»");
+				Set<Player> matchingPlayers = getMatchingPlayers(candidates);
+				if(matchingPlayers.isEmpty()) {
+					return false;
+				} else {
+					setMatchResult(matchingPlayers.iterator().next());
+					return true;
 				}
-				return result;
 			}
 		}
 	'''

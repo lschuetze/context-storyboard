@@ -13,7 +13,8 @@ public class MatchActivity extends Activity {
 
 	@Override
 	public void execute() {
-		if (matcher.execute(runtime.getModelInstanceQuery())) {
+		matcher.setQuery(runtime.getModelInstanceQuery());
+		if (matcher.execute()) {
 			adapt();
 			fireSuccess(currentToken);
 		} else {
